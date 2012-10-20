@@ -30,6 +30,13 @@
 
 @implementation NSString (A4G)
 
++ (NSString *) utf8StringFromData:(NSData*)data {
+    if (data != nil && data.length > 0) {
+        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
+    return nil;
+}
+
 + (BOOL) isNilOrEmpty:(NSString *)string {
 	return string == nil || [[string  stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0;
 }

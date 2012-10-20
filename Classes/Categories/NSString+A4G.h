@@ -30,6 +30,8 @@
 
 @interface NSString (A4G)
 
++ (NSString *) utf8StringFromData:(NSData*)data;
+
 + (BOOL) isNilOrEmpty:(NSString *)string;
 + (BOOL) isPhoneNumber:(NSString *)string;
 + (BOOL) isEmailAddress:(NSString *)string;

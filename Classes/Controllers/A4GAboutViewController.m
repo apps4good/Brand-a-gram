@@ -1,0 +1,53 @@
+//
+//  A4GAboutViewController.m
+//  Brandagram
+//
+//  Created by Dale Zak on 12-10-20.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "A4GAboutViewController.h"
+
+@interface A4GAboutViewController ()
+
+@end
+
+@implementation A4GAboutViewController
+
+// @synthesize label = _label;
+
+#pragma mark - IBActions
+
+//- (IBAction)click:(id)sender event:(UIEvent*)event { }
+
+#pragma mark - UIViewController
+
+- (void)dealloc {
+    [super dealloc];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
+
+@end

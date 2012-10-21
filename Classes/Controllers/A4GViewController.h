@@ -31,6 +31,7 @@
 @interface A4GViewController : UIViewController<UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
+@property (strong, nonatomic) IBOutlet UIToolbar *toolBar;
 
 - (void) showLoading;
 - (void) showLoadingWithMessage:(NSString *)message;

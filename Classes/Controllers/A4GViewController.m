@@ -42,6 +42,7 @@
 
 @synthesize navigationBar = _navigationBar;
 @synthesize loadingView = _loadingView;
+@synthesize toolBar = _toolBar;
 
 typedef enum {
     AlertViewError,
@@ -87,6 +88,7 @@ typedef enum {
     DLog(@"%@", self.nibName);
     [_loadingView release];
     [_navigationBar release];
+    [_toolBar release];
     [super dealloc];
 }
 
@@ -95,6 +97,7 @@ typedef enum {
     DLog(@"%@", self.nibName);
     self.loadingView = [A4GLoadingView initWithController:self];
     self.navigationBar.tintColor = [A4GSettings navBarColor];
+    self.toolBar.tintColor = [A4GSettings toolBarColor];
     [self changeTintColorForButton:self.navigationBar.topItem.leftBarButtonItem];
     [self changeTintColorForButton:self.navigationBar.topItem.rightBarButtonItem];
     [self changeTintColorForButton:self.navigationItem.leftBarButtonItem];

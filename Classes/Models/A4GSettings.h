@@ -42,6 +42,7 @@
 + (NSString *) aboutURL;
 
 + (UIColor *) navBarColor;
++ (UIColor *) toolBarColor;
 + (UIColor *) buttonDoneColor;
 
 + (UIColor *) tablePlainBackColor;

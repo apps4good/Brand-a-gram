@@ -82,12 +82,12 @@
 						<object class="IBUINavigationItem" key="IBUINavigationItem" id="947171481">
 							<reference key="IBUINavigationBar"/>
 							<string key="IBUITitle">Brandagram</string>
-							<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="971112472">
+							<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="1032198616">
 								<string key="IBUITitle">Back</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIStyle">1</int>
 							</object>
-							<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="814406714">
+							<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="384305372">
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUINavigationItem" ref="947171481"/>
@@ -203,9 +203,17 @@
 					<int key="connectionID">31</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">navigationBar</string>
+						<reference key="source" ref="1065172856"/>
+						<reference key="destination" ref="579316053"/>
+					</object>
+					<int key="connectionID">40</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">camera:event:</string>
-						<reference key="source" ref="814406714"/>
+						<reference key="source" ref="384305372"/>
 						<reference key="destination" ref="1065172856"/>
 					</object>
 					<int key="connectionID">38</int>
@@ -285,19 +293,19 @@
 						<int key="objectID">28</int>
 						<reference key="object" ref="947171481"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="814406714"/>
-							<reference ref="971112472"/>
+							<reference ref="384305372"/>
+							<reference ref="1032198616"/>
 						</array>
 						<reference key="parent" ref="1065172856"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">37</int>
-						<reference key="object" ref="814406714"/>
+						<reference key="object" ref="384305372"/>
 						<reference key="parent" ref="947171481"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">39</int>
-						<reference key="object" ref="971112472"/>
+						<reference key="object" ref="1032198616"/>
 						<reference key="parent" ref="947171481"/>
 					</object>
 				</array>
@@ -328,7 +336,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">39</int>
+			<int key="maxID">40</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -385,7 +393,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">A4GCameraViewController</string>
-					<string key="superclassName">UIViewController</string>
+					<string key="superclassName">A4GViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<string key="NS.key.0">camera:event:</string>
 						<string key="NS.object.0">id</string>
@@ -433,7 +441,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">A4GPreviewViewController</string>
-					<string key="superclassName">UIViewController</string>
+					<string key="superclassName">A4GViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="email:event:">id</string>
 						<string key="facebook:event:">id</string>
@@ -477,6 +485,28 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/A4GPreviewViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">A4GViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="navigationBar">UINavigationBar</string>
+						<string key="toolBar">UIToolbar</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="navigationBar">
+							<string key="name">navigationBar</string>
+							<string key="candidateClassName">UINavigationBar</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="toolBar">
+							<string key="name">toolBar</string>
+							<string key="candidateClassName">UIToolbar</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/A4GViewController.h</string>
 					</object>
 				</object>
 			</array>

@@ -65,5 +65,35 @@
 		<string>overlay-3.png</string>
 		<string>overlay-4.png</string>
 	</array>
+	<key>A4GAboutEmail</key>
+	<string>contact@apps4good.ca</string>
+	<key>A4GAppText</key>
+	<string>Brandagram is a unique photo sharing app framework for iPhone designed to promote fun, engagement, and community at your event/organization!</string>
+	<key>A4GAppURL</key>
+	<string>http://apps4good.ca/apps/brandagram</string>
+	<key>A4GButtonDoneColor</key>
+	<string>#2E2E2E</string>
+	<key>A4GNavBarColor</key>
+	<string>#61acc9</string>
+	<key>A4GToolBarColor</key>
+	<string>#b2e6f2</string>
+	<key>A4GTableGroupedBackColor</key>
+	<string>#F2F2F2</string>
+	<key>A4GTableGroupedHeaderTextColor</key>
+	<string>#6E6E6E</string>
+	<key>A4GTableGroupedTextColor</key>
+	<string>#848484</string>
+	<key>A4GTablePlainBackColor</key>
+	<string>#FAFAFA</string>
+	<key>A4GTablePlainHeaderBackColor</key>
+	<string>#6E6E6E</string>
+	<key>A4GTablePlainHeaderTextColor</key>
+	<string>#424242</string>
+	<key>A4GTablePlainRowEvenColor</key>
+	<string>#F3F3F3</string>
+	<key>A4GTablePlainRowOddColor</key>
+	<string>#F1F1F1</string>
+	<key>A4GTablePlainTextColor</key>
+	<string>#848484</string>
 </dict>
 </plist>

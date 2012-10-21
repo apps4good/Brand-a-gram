@@ -91,6 +91,10 @@
     return [A4GSettings colorFromBundleForKey:@"A4GNavBarColor"];
 }
 
++ (UIColor *) toolBarColor {
+    return [A4GSettings colorFromBundleForKey:@"A4GToolBarColor"];
+}
+
 + (UIColor *) buttonDoneColor {
     return [A4GSettings colorFromBundleForKey:@"A4GButtonDoneColor"];
 }

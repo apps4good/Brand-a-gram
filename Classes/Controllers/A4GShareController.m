@@ -161,11 +161,9 @@ typedef enum {
         TWTweetComposeViewController *twitterViewController = [[TWTweetComposeViewController alloc] init];
         if (tweet != nil) {
             [twitterViewController setInitialText:tweet];
-            //[twitterViewController performSelector:@selector(setInitialText:) withObject:tweet];
         }
         if (url != nil) {
             [twitterViewController addURL:[NSURL URLWithString:url]];
-            //[twitterViewController performSelector:@selector(addURL:) withObject:[NSURL URLWithString:url]];    
         }
         [self.controller presentModalViewController:twitterViewController animated:YES];
         [twitterViewController release];
@@ -178,11 +176,9 @@ typedef enum {
         TWTweetComposeViewController *twitterViewController = [[TWTweetComposeViewController alloc] init];
         if (tweet != nil) {
             [twitterViewController setInitialText:tweet];
-            //[twitterViewController performSelector:@selector(setInitialText:) withObject:tweet];
         }
         if (image != nil) {
             [twitterViewController addImage:image];
-            //[twitterViewController performSelector:@selector(addImage:) withObject:image];    
         }
         [self.controller presentModalViewController:twitterViewController animated:YES];
         [twitterViewController release];
@@ -261,11 +257,10 @@ typedef enum {
 }
 
 - (void) sendEmail:(NSString*)message withSubject:(NSString *)subject toRecipient:(NSString*)recipient {
-    NSArray *recipients = recipient != nil ? [NSArray arrayWithObject:recipient] : nil;
-    [self sendEmail:message withSubject:subject toRecipients:recipients];   
+    [self sendEmail:message withSubject:subject toRecipient:recipient withAttachment:nil andFileName:nil];   
 }
 
-- (void) sendEmail:(NSString*)message withSubject:(NSString *)subject toRecipients:(NSArray*)recipients {
+- (void) sendEmail:(NSString*)message withSubject:(NSString *)subject toRecipient:(NSString*)recipient withAttachment:(NSData*)data andFileName:(NSString*)fileName {
     DLog(@"Message:%@ Subject:%@", message, subject);
     if ([self canSendEmail]) {
         MFMailComposeViewController *mailController = [[[MFMailComposeViewController alloc] init] autorelease];
@@ -277,13 +272,17 @@ typedef enum {
         if (message != nil) {
             [mailController setMessageBody:message isHTML:YES]; 
         }
-        if (recipients != nil) {
-            [mailController setToRecipients:recipients];
+        if (recipient != nil) {
+            [mailController setToRecipients:[NSArray arrayWithObject:recipient]];
+        }
+        if (data != nil) {
+            
+            [mailController addAttachmentData:data mimeType:@"image/jpg" fileName:fileName];
         }
         mailController.modalPresentationStyle = UIModalPresentationFormSheet;
         mailController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self.controller presentModalViewController:mailController animated:YES]; 
-    }
+    }    
 }
 
 #pragma mark - MFMailComposeViewController

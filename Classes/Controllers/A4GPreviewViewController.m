@@ -7,6 +7,7 @@
 //
 
 #import "A4GPreviewViewController.h"
+#import "A4GSettings.h"
 
 @interface A4GPreviewViewController ()
 
@@ -24,7 +25,7 @@
 
 - (IBAction)twitter:(id)sender event:(UIEvent*)event {
     DLog(@"");
-    [self.shareController sendTweet:@"Brandagram" withImage:self.image];
+    [self.shareController sendTweet:[A4GSettings appName] withImage:self.image];
 }
 
 - (IBAction)facebook:(id)sender event:(UIEvent*)event {
@@ -33,6 +34,8 @@
 
 - (IBAction)email:(id)sender event:(UIEvent*)event {
     DLog(@"");
+    NSData *data = UIImageJPEGRepresentation(self.image, 0);
+    [self.shareController sendEmail:[A4GSettings appName] withSubject:nil toRecipient:nil withAttachment:data andFileName:NSLocalizedString(@"%@.jpg", [A4GSettings appName])];
 }
 
 - (IBAction)sms:(id)sender event:(UIEvent*)event {

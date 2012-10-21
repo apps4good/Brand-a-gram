@@ -58,7 +58,7 @@ MFMessageComposeViewControllerDelegate>
 - (void) sendTweet:(NSString*)tweet withImage:(UIImage*)image;
 - (void) printText:(NSString*)text withTitle:(NSString*)title;
 - (void) sendEmail:(NSString*)message withSubject:(NSString *)subject toRecipient:(NSString*)recipient;
-- (void) sendEmail:(NSString*)message withSubject:(NSString *)subject toRecipients:(NSArray*)recipients;
+- (void) sendEmail:(NSString*)message withSubject:(NSString *)subject toRecipient:(NSString*)recipient withAttachment:(NSData*)data andFileName:(NSString*)fileName;
 - (void) sendSMS:(NSString *)message;
 
 @end

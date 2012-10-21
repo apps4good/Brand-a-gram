@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "A4GViewController.h"
 
 @interface A4GAboutViewController : UIViewController
 

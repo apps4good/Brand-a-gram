@@ -168,8 +168,8 @@
 
 - (void)swipeLeft:(UISwipeGestureRecognizer *)recognizer { 
     DLog(@"");
-    if (self.pageControl.currentPage > 0) {
-        self.pageControl.currentPage -= 1; 
+    if (self.pageControl.currentPage < self.overlays.count) {
+        self.pageControl.currentPage += 1; 
         NSString *image = [self.overlays objectAtIndex:self.pageControl.currentPage];
         self.overlayView.image = [UIImage imageNamed:image];
     }
@@ -177,8 +177,8 @@
 
 - (void)swipeRight:(UISwipeGestureRecognizer *)recognizer {
     DLog(@""); 
-    if (self.pageControl.currentPage < self.overlays.count) {
-        self.pageControl.currentPage += 1; 
+    if (self.pageControl.currentPage > 0) {
+        self.pageControl.currentPage -= 1; 
         NSString *image = [self.overlays objectAtIndex:self.pageControl.currentPage];
         self.overlayView.image = [UIImage imageNamed:image];
     }

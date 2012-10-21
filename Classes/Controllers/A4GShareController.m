@@ -170,6 +170,21 @@ typedef enum {
     }
 }
 
+- (void) sendTweet:(NSString*)tweet withImage:(UIImage*)image {
+    DLog(@"Tweet:%@ Image", tweet);
+    if ([self canSendTweet]) {
+        TWTweetComposeViewController *twitterViewController = [[TWTweetComposeViewController alloc] init];
+        if (tweet != nil) {
+            [twitterViewController performSelector:@selector(setInitialText:) withObject:tweet];
+        }
+        if (image != nil) {
+            [twitterViewController performSelector:@selector(addImage::) withObject:image];    
+        }
+        [self.controller presentModalViewController:twitterViewController animated:YES];
+        [twitterViewController release];
+    }
+}
+
 - (void) printText:(NSString*)text withTitle:(NSString*)title {
     DLog(@"Text:%@ Title:%@", text, title);
     if ([self canPrintText]) {

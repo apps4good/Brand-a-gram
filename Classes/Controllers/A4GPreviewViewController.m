@@ -10,17 +10,21 @@
 
 @interface A4GPreviewViewController ()
 
+@property (strong, nonatomic) A4GShareController *shareController;
+
 @end
 
 @implementation A4GPreviewViewController
 
 @synthesize imageView = _imageView;
 @synthesize image = _image;
+@synthesize shareController = _shareController;
 
 #pragma mark - IBActions
 
 - (IBAction)twitter:(id)sender event:(UIEvent*)event {
     DLog(@"");
+    [self.shareController sendTweet:@"Brandagram" withImage:self.image];
 }
 
 - (IBAction)facebook:(id)sender event:(UIEvent*)event {
@@ -44,11 +48,13 @@
 - (void)dealloc {
     [_image release];
     [_imageView release];
+    [_shareController release];
     [super dealloc];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.shareController = [[A4GShareController alloc] initWithController:self];
 }
 
 - (void)viewDidUnload {

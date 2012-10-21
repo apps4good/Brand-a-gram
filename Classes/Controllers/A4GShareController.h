@@ -55,6 +55,7 @@ MFMessageComposeViewControllerDelegate>
 - (void) openURL:(NSString *)url;
 - (void) copyText:(NSString *)string;
 - (void) sendTweet:(NSString*)tweet withURL:(NSString*)url;
+- (void) sendTweet:(NSString*)tweet withImage:(UIImage*)image;
 - (void) printText:(NSString*)text withTitle:(NSString*)title;
 - (void) sendEmail:(NSString*)message withSubject:(NSString *)subject toRecipient:(NSString*)recipient;
 - (void) sendEmail:(NSString*)message withSubject:(NSString *)subject toRecipients:(NSArray*)recipients;

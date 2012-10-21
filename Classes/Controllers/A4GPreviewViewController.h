@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "A4GViewController.h"
+#import "A4GShareController.h"
 
-@interface A4GPreviewViewController : UIViewController
+@interface A4GPreviewViewController : A4GViewController<A4GShareControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) UIImage *image;

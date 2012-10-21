@@ -7,16 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreMedia/CoreMedia.h>
-#import <AVFoundation/AVFoundation.h>
 
 @class A4GPreviewViewController;
 @class A4GAboutViewController;
 
-@interface A4GCameraViewController : UIViewController
+@interface A4GCameraViewController : UIViewController<UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet A4GPreviewViewController *previewViewController;
 @property (strong, nonatomic) IBOutlet A4GAboutViewController *aboutViewController;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundView;
+@property (strong, nonatomic) IBOutlet UIImageView *overlayView;
+@property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (strong, nonatomic) IBOutlet UIView *containerView;
 
 - (IBAction)previous:(id)sender event:(UIEvent*)event;
 - (IBAction)next:(id)sender event:(UIEvent*)event;

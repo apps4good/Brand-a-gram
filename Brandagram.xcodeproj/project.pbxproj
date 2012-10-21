@@ -81,6 +81,7 @@
 		3E4AFBA3163373B50016F47C /* Default-Portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4AFBA2163373B50016F47C /* Default-Portrait@2x.png */; };
 		3E4AFBA516337E8F0016F47C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4AFBA416337E8C0016F47C /* CoreMedia.framework */; };
 		3E4AFBA716337E9A0016F47C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4AFBA616337E980016F47C /* AVFoundation.framework */; };
+		3E713150163457F10036E64F /* border.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E71314F163457F10036E64F /* border.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -192,6 +193,7 @@
 		3E4AFBA2163373B50016F47C /* Default-Portrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x.png"; sourceTree = "<group>"; };
 		3E4AFBA416337E8C0016F47C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		3E4AFBA616337E980016F47C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		3E71314F163457F10036E64F /* border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = border.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,6 +335,7 @@
 				3E4AFB3416334A920016F47C /* Icon~iPad.png */,
 				3E4AFB3B16334AFD0016F47C /* iTunesArtwork.png */,
 				3E4AFB3C16334AFD0016F47C /* iTunesArtwork@2x.png */,
+				3E71314F163457F10036E64F /* border.png */,
 			);
 			path = Apps4Good;
 			sourceTree = "<group>";
@@ -564,6 +567,7 @@
 				3E4AFB9B163370D50016F47C /* next@2x.png in Resources */,
 				3E4AFB9D163372D00016F47C /* Default-Portrait.png in Resources */,
 				3E4AFBA3163373B50016F47C /* Default-Portrait@2x.png in Resources */,
+				3E713150163457F10036E64F /* border.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

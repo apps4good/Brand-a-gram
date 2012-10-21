@@ -12,12 +12,19 @@
 
 @interface A4GCameraViewController ()
 
+@property (strong, nonatomic) UIImagePickerController *imagePicker;
+
 @end
 
 @implementation A4GCameraViewController
 
 @synthesize previewViewController = _previewViewController;
 @synthesize aboutViewController = _aboutViewController;
+@synthesize backgroundView = _backgroundView;
+@synthesize overlayView = _overlayView;
+@synthesize pageControl = _pageControl;
+@synthesize imagePicker = _imagePicker;
+@synthesize containerView = _containerView;
 
 #pragma mark - IBActions
 
@@ -34,12 +41,25 @@
 - (void)dealloc {
     [_previewViewController release];
     [_aboutViewController release];
+    [_backgroundView release];
+    [_overlayView release];
+    [_pageControl release];
+    [_imagePicker release];
+    [_containerView release];
     [super dealloc];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     DLog(@"");
+
+    self.imagePicker = [[UIImagePickerController alloc] init];
+    //self.imagePicker.delegate = self;
+    
+    self.imagePicker.navigationBarHidden = NO;
+    self.imagePicker.toolbarHidden = YES;
+    self.imagePicker.wantsFullScreenLayout = NO;
+    [self.containerView addSubview:self.imagePicker.view];
 }
 
 - (void)viewDidUnload {
@@ -67,4 +87,13 @@
     DLog(@"");
 }
 
+#pragma mark - UIImagePickerController
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+}
 @end

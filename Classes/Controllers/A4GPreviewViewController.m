@@ -14,7 +14,8 @@
 
 @implementation A4GPreviewViewController
 
-// @synthesize label = _label;
+@synthesize imageView = _imageView;
+@synthesize image = _image;
 
 #pragma mark - IBActions
 
@@ -41,6 +42,8 @@
 #pragma mark - UIViewController
 
 - (void)dealloc {
+    [_image release];
+    [_imageView release];
     [super dealloc];
 }
 
@@ -54,6 +57,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.imageView.image = self.image;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

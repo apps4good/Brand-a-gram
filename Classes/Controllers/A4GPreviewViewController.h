@@ -10,7 +10,8 @@
 
 @interface A4GPreviewViewController : UIViewController
 
-// @property (strong, nonatomic) IBOutlet UILabel *label;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) UIImage *image;
 
 - (IBAction)twitter:(id)sender event:(UIEvent*)event;
 - (IBAction)facebook:(id)sender event:(UIEvent*)event;

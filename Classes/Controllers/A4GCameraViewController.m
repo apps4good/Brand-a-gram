@@ -99,6 +99,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     DLog(@"");
+    
+    UIImage *logo = [UIImage imageNamed:@"logo.png"];
+    if (logo != nil) {
+        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:logo];
+    }
+    else {
+        self.navigationItem.title = [A4GSettings appName];
+    }
+    
     self.overlays = [A4GSettings overlays];
     self.overlayView.image = [UIImage imageNamed:[self.overlays objectAtIndex:0]];
     self.pageControl.numberOfPages = self.overlays.count;
@@ -109,7 +118,7 @@
     self.captureSession.sessionPreset = AVCaptureSessionPresetHigh;
     self.captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
-    self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    self.previewLayer.videoGravity = AVLayerVideoGravityResize;
     self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.captureSession];
     self.previewLayer.frame = self.cameraView.frame;
     [self.cameraView.layer addSublayer:self.previewLayer];

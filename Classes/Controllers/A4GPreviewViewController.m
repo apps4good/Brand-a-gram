@@ -35,7 +35,10 @@
 - (IBAction)email:(id)sender event:(UIEvent*)event {
     DLog(@"");
     NSData *data = UIImageJPEGRepresentation(self.image, 0);
-    [self.shareController sendEmail:[A4GSettings appName] withSubject:nil toRecipient:nil withAttachment:data andFileName:NSLocalizedString(@"%@.jpg", [A4GSettings appName])];
+    [self.shareController sendEmail:nil 
+                        withSubject:[A4GSettings appName] 
+                        toRecipient:nil withAttachment:data 
+                        andFileName:NSLocalizedString(@"%@.jpg", [A4GSettings appName])];
 }
 
 - (IBAction)sms:(id)sender event:(UIEvent*)event {
@@ -57,6 +60,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIImage *logo = [UIImage imageNamed:@"logo.png"];
+    if (logo != nil) {
+        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:logo];
+    }
+    else {
+        self.navigationItem.title = [A4GSettings appName];
+    }
+    self.title = [A4GSettings appName];
     self.shareController = [[A4GShareController alloc] initWithController:self];
 }
 

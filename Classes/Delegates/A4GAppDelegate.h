@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class A4GCameraViewController;
+@class A4GPreviewViewController;
+@class A4GAboutViewController;
+
 @interface A4GAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) IBOutlet UIWindow *window;
+@property (strong, nonatomic) IBOutlet A4GCameraViewController *cameraViewController;
+@property (strong, nonatomic) IBOutlet A4GPreviewViewController *previewViewController;
+@property (strong, nonatomic) IBOutlet A4GAboutViewController *aboutViewController;
 
 @end

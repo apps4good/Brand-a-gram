@@ -7,6 +7,8 @@
 //
 
 #import "A4GCameraViewController.h"
+#import "A4GPreviewViewController.h"
+#import "A4GAboutViewController.h"
 
 @interface A4GCameraViewController ()
 
@@ -14,40 +16,55 @@
 
 @implementation A4GCameraViewController
 
-// @synthesize label = _label;
+@synthesize previewViewController = _previewViewController;
+@synthesize aboutViewController = _aboutViewController;
 
 #pragma mark - IBActions
 
-//- (IBAction)click:(id)sender event:(UIEvent*)event { }
+- (IBAction)previous:(id)sender event:(UIEvent*)event {
+    DLog(@"");
+}
+
+- (IBAction)next:(id)sender event:(UIEvent*)event {
+    DLog(@"");    
+}
 
 #pragma mark - UIViewController
 
 - (void)dealloc {
+    [_previewViewController release];
+    [_aboutViewController release];
     [super dealloc];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    DLog(@"");
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
+    DLog(@"");
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    DLog(@"");
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    DLog(@"");
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    DLog(@"");
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
+    [super viewDidDisappear:animated];    
+    DLog(@"");
 }
 
 @end

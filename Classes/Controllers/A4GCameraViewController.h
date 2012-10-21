@@ -7,11 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreMedia/CoreMedia.h>
+#import <AVFoundation/AVFoundation.h>
+
+@class A4GPreviewViewController;
+@class A4GAboutViewController;
 
 @interface A4GCameraViewController : UIViewController
 
-// @property (strong, nonatomic) IBOutlet UILabel *label;
+@property (strong, nonatomic) IBOutlet A4GPreviewViewController *previewViewController;
+@property (strong, nonatomic) IBOutlet A4GAboutViewController *aboutViewController;
 
-//- (IBAction)click:(id)sender event:(UIEvent*)event;
+- (IBAction)previous:(id)sender event:(UIEvent*)event;
+- (IBAction)next:(id)sender event:(UIEvent*)event;
 
 @end

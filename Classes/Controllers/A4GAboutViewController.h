@@ -12,6 +12,6 @@
 
 // @property (strong, nonatomic) IBOutlet UILabel *label;
 
-//- (IBAction)click:(id)sender event:(UIEvent*)event;
+- (IBAction)done:(id)sender event:(UIEvent*)event;
 
 @end

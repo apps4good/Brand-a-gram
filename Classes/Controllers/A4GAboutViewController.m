@@ -18,7 +18,9 @@
 
 #pragma mark - IBActions
 
-//- (IBAction)click:(id)sender event:(UIEvent*)event { }
+- (IBAction)done:(id)sender event:(UIEvent*)event { 
+    
+}
 
 #pragma mark - UIViewController
 

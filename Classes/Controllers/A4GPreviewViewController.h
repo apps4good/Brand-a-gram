@@ -12,6 +12,10 @@
 
 // @property (strong, nonatomic) IBOutlet UILabel *label;
 
-//- (IBAction)click:(id)sender event:(UIEvent*)event;
+- (IBAction)twitter:(id)sender event:(UIEvent*)event;
+- (IBAction)facebook:(id)sender event:(UIEvent*)event;
+- (IBAction)email:(id)sender event:(UIEvent*)event;
+- (IBAction)sms:(id)sender event:(UIEvent*)event;
+- (IBAction)save:(id)sender event:(UIEvent*)event;
 
 @end

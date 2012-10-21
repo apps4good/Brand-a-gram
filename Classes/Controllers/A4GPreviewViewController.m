@@ -18,7 +18,25 @@
 
 #pragma mark - IBActions
 
-//- (IBAction)click:(id)sender event:(UIEvent*)event { }
+- (IBAction)twitter:(id)sender event:(UIEvent*)event {
+    DLog(@"");
+}
+
+- (IBAction)facebook:(id)sender event:(UIEvent*)event {
+    DLog(@"");
+}
+
+- (IBAction)email:(id)sender event:(UIEvent*)event {
+    DLog(@"");
+}
+
+- (IBAction)sms:(id)sender event:(UIEvent*)event {
+    DLog(@""); 
+}
+
+- (IBAction)save:(id)sender event:(UIEvent*)event {
+    DLog(@"");
+}
 
 #pragma mark - UIViewController
 

@@ -51,6 +51,10 @@
 
 @implementation A4GSettings
 
++ (NSArray *) overlays {
+    return [A4GSettings arrayFromBundleForKey:@"A4GOverlays"];
+}
+
 + (NSArray *) kmlFiles {
     return [[NSBundle mainBundle] pathsForResourcesOfType:@"kml" inDirectory:nil];
 }

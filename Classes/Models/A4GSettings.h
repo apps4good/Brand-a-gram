@@ -30,6 +30,8 @@
 
 @interface A4GSettings : NSObject
 
++ (NSArray *) overlays;
+
 + (NSString *) appName;
 + (NSString *) appText;
 + (NSString *) appURL;

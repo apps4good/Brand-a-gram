@@ -11,7 +11,8 @@
 @class A4GPreviewViewController;
 @class A4GAboutViewController;
 
-@interface A4GCameraViewController : UIViewController<UIImagePickerControllerDelegate>
+@interface A4GCameraViewController : UIViewController<UINavigationControllerDelegate,
+                                                      UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet A4GPreviewViewController *previewViewController;
 @property (strong, nonatomic) IBOutlet A4GAboutViewController *aboutViewController;

@@ -160,10 +160,12 @@ typedef enum {
     if ([self canSendTweet]) {
         TWTweetComposeViewController *twitterViewController = [[TWTweetComposeViewController alloc] init];
         if (tweet != nil) {
-            [twitterViewController performSelector:@selector(setInitialText:) withObject:tweet];
+            [twitterViewController setInitialText:tweet];
+            //[twitterViewController performSelector:@selector(setInitialText:) withObject:tweet];
         }
         if (url != nil) {
-            [twitterViewController performSelector:@selector(addURL:) withObject:[NSURL URLWithString:url]];    
+            [twitterViewController addURL:[NSURL URLWithString:url]];
+            //[twitterViewController performSelector:@selector(addURL:) withObject:[NSURL URLWithString:url]];    
         }
         [self.controller presentModalViewController:twitterViewController animated:YES];
         [twitterViewController release];
@@ -175,10 +177,12 @@ typedef enum {
     if ([self canSendTweet]) {
         TWTweetComposeViewController *twitterViewController = [[TWTweetComposeViewController alloc] init];
         if (tweet != nil) {
-            [twitterViewController performSelector:@selector(setInitialText:) withObject:tweet];
+            [twitterViewController setInitialText:tweet];
+            //[twitterViewController performSelector:@selector(setInitialText:) withObject:tweet];
         }
         if (image != nil) {
-            [twitterViewController performSelector:@selector(addImage::) withObject:image];    
+            [twitterViewController addImage:image];
+            //[twitterViewController performSelector:@selector(addImage:) withObject:image];    
         }
         [self.controller presentModalViewController:twitterViewController animated:YES];
         [twitterViewController release];

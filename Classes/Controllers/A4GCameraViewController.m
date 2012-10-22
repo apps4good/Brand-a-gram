@@ -50,6 +50,12 @@
 
 #pragma mark - IBActions
 
+- (IBAction)about:(id)sender event:(UIEvent*)event {
+    DLog(@""); 
+    self.aboutViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self.navigationController presentModalViewController:self.aboutViewController animated:YES];
+}
+
 - (IBAction)camera:(id)sender event:(UIEvent*)event {
     DLog(@"");
     AVCaptureConnection *videoConnection = nil;
@@ -171,6 +177,10 @@
     [self.view removeGestureRecognizer:self.swipeLeftRecognizer];
     [self.view removeGestureRecognizer:self.swipeRightRecognizer];
     [self.captureSession stopRunning];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return interfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
 #pragma mark - UISwipeGestureRecognizer

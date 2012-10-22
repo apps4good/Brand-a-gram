@@ -19,7 +19,7 @@
 #pragma mark - IBActions
 
 - (IBAction)done:(id)sender event:(UIEvent*)event { 
-    
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - UIViewController
@@ -50,6 +50,10 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return interfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
 @end

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "A4GViewController.h"
+#import "A4GTableViewController.h"
 
-@interface A4GAboutViewController : UIViewController
+@interface A4GAboutViewController : A4GTableViewController
 
 // @property (strong, nonatomic) IBOutlet UILabel *label;
 

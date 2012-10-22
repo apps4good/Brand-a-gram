@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong, nonatomic) IBOutlet UIView *cameraView;
 
+- (IBAction)about:(id)sender event:(UIEvent*)event;
 - (IBAction)camera:(id)sender event:(UIEvent*)event;
 
 @end

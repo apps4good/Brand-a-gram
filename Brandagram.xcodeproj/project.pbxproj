@@ -89,6 +89,10 @@
 		3E713166163479F30036E64F /* overlay-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E71315E163479F30036E64F /* overlay-2.png */; };
 		3E713167163479F30036E64F /* overlay-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E71315F163479F30036E64F /* overlay-3.png */; };
 		3E713168163479F30036E64F /* overlay-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E713160163479F30036E64F /* overlay-4.png */; };
+		3E7131701634BE900036E64F /* A4GLocator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E71316F1634BE900036E64F /* A4GLocator.m */; };
+		3E7131731634C0140036E64F /* A4GTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7131721634C0140036E64F /* A4GTableViewController.m */; };
+		3E7131761634C4380036E64F /* A4GDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7131751634C4380036E64F /* A4GDevice.m */; };
+		3E7131791634C54D0036E64F /* A4GHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7131781634C54D0036E64F /* A4GHeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -208,6 +212,14 @@
 		3E71315E163479F30036E64F /* overlay-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "overlay-2.png"; sourceTree = "<group>"; };
 		3E71315F163479F30036E64F /* overlay-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "overlay-3.png"; sourceTree = "<group>"; };
 		3E713160163479F30036E64F /* overlay-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "overlay-4.png"; sourceTree = "<group>"; };
+		3E71316E1634BE900036E64F /* A4GLocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A4GLocator.h; sourceTree = "<group>"; };
+		3E71316F1634BE900036E64F /* A4GLocator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A4GLocator.m; sourceTree = "<group>"; };
+		3E7131711634C0130036E64F /* A4GTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A4GTableViewController.h; sourceTree = "<group>"; };
+		3E7131721634C0140036E64F /* A4GTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A4GTableViewController.m; sourceTree = "<group>"; };
+		3E7131741634C4380036E64F /* A4GDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A4GDevice.h; sourceTree = "<group>"; };
+		3E7131751634C4380036E64F /* A4GDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A4GDevice.m; sourceTree = "<group>"; };
+		3E7131771634C54D0036E64F /* A4GHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A4GHeaderView.h; sourceTree = "<group>"; };
+		3E7131781634C54D0036E64F /* A4GHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A4GHeaderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,6 +387,8 @@
 			children = (
 				3E4AFB04163344D00016F47C /* A4GViewController.h */,
 				3E4AFB05163344D00016F47C /* A4GViewController.m */,
+				3E7131711634C0130036E64F /* A4GTableViewController.h */,
+				3E7131721634C0140036E64F /* A4GTableViewController.m */,
 				3E4AFAF71633439C0016F47C /* A4GCameraViewController.h */,
 				3E4AFAF81633439C0016F47C /* A4GCameraViewController.m */,
 				3E4AFAF4163343650016F47C /* A4GPreviewViewController.h */,
@@ -394,6 +408,8 @@
 				3E4AFB08163344FB0016F47C /* A4GLoadingView.m */,
 				3E4AFB0A163345270016F47C /* A4GLoadingButton.h */,
 				3E4AFB0B163345270016F47C /* A4GLoadingButton.m */,
+				3E7131771634C54D0036E64F /* A4GHeaderView.h */,
+				3E7131781634C54D0036E64F /* A4GHeaderView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -451,6 +467,10 @@
 			children = (
 				3E4AFB01163344B10016F47C /* A4GSettings.h */,
 				3E4AFB02163344B10016F47C /* A4GSettings.m */,
+				3E71316E1634BE900036E64F /* A4GLocator.h */,
+				3E71316F1634BE900036E64F /* A4GLocator.m */,
+				3E7131741634C4380036E64F /* A4GDevice.h */,
+				3E7131751634C4380036E64F /* A4GDevice.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -637,6 +657,10 @@
 				3E4AFB751633543E0016F47C /* SBJsonWriter.m in Sources */,
 				3E4AFB78163354AE0016F47C /* NSError+A4G.m in Sources */,
 				3E4AFB7B163354F90016F47C /* NSObject+A4G.m in Sources */,
+				3E7131701634BE900036E64F /* A4GLocator.m in Sources */,
+				3E7131731634C0140036E64F /* A4GTableViewController.m in Sources */,
+				3E7131761634C4380036E64F /* A4GDevice.m in Sources */,
+				3E7131791634C54D0036E64F /* A4GHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

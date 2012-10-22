@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>Apps4Good</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>
@@ -23,11 +23,11 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>ca.apps4good.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>ca.apps4good.brandagram.apps4good</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>Apps4Good</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -68,15 +68,19 @@
 	<key>A4GAboutEmail</key>
 	<string>contact@apps4good.ca</string>
 	<key>A4GAppText</key>
-	<string>Brandagram is a unique photo sharing app framework for iPhone designed to promote fun, engagement, and community at your event/organization!</string>
+	<string>Brandagram is a unique photo sharing app for iPhone designed to promote fun, engagement, and community at your event or organization!</string>
+	<key>A4GAboutText</key>
+	<string>Apps4Good is an alliance of software developers who are passionate about improving their community, by doing what they love: building software.</string>
+	<key>A4GAboutURL</key>
+	<string>http://apps4good.ca</string>
 	<key>A4GAppURL</key>
 	<string>http://apps4good.ca/apps/brandagram</string>
 	<key>A4GButtonDoneColor</key>
-	<string>#386890</string>
+	<string>#4a8abf</string>
 	<key>A4GNavBarColor</key>
 	<string>#61acc9</string>
 	<key>A4GToolBarColor</key>
-	<string>#b2e6f2</string>
+	<string>#848484</string>
 	<key>A4GTableGroupedBackColor</key>
 	<string>#F2F2F2</string>
 	<key>A4GTableGroupedHeaderTextColor</key>
@@ -95,5 +99,9 @@
 	<string>#F1F1F1</string>
 	<key>A4GTablePlainTextColor</key>
 	<string>#848484</string>
+	<key>A4GFacebookAppID</key>
+	<string>278468152260797</string>
+	<key>UNFacebookAppSecret</key>
+	<string>91114ba6da2dcdb3e71c35b9b0258d73</string>
 </dict>
 </plist>

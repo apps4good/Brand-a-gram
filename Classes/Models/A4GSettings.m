@@ -135,6 +135,38 @@
     return [A4GSettings colorFromBundleForKey:@"A4GTableGroupedHeaderTextColor"];
 }
 
++(NSString*)facebookAppID {
+    return [A4GSettings stringFromBundleForKey:@"UNFacebookAppID"];
+}
+
++(NSString*)facebookAppSecret {
+    return [A4GSettings stringFromBundleForKey:@"UNFacebookAppSecret"];
+}
+
++(NSString*)facebookTokenKey {
+    return [A4GSettings stringFromDefaultsForKey:@"facebookTokenKey" defaultValue:nil]; 
+}
+
++(void)setFacebookTokenKey:(NSString*)tokenKey {
+    [A4GSettings setString:tokenKey forKey:@"facebookTokenKey"];
+}
+
++(NSDate*)facebookDateKey {
+    return [A4GSettings dateFromDefaultsForKey:@"facebookDateKey" defaultValue:nil]; 
+}
+
++(void)setFacebookDateKey:(NSDate*)dateKey {
+    [A4GSettings setDate:dateKey forKey:@"facebookDateKey"];
+}
+
++(BOOL)facebookAuthorizing {
+    return [A4GSettings boolFromDefaultsForKey:@"facebookAuthorizing" defaultValue:NO];
+}
+
++(void)setFacebookAuthorizing:(BOOL)facebookAuthorizing {
+    [A4GSettings setBool:facebookAuthorizing forKey:@"facebookAuthorizing"];
+}
+
 #pragma mark - Helpers
 
 + (NSString*) stringFromBundleForKey:(NSString *)key {

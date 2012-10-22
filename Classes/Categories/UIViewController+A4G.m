@@ -119,4 +119,15 @@
     return [[[UIBarButtonItem alloc] initWithCustomView:toolbar] autorelease];
 }
 
+- (CGRect) touchForEvent:(UIEvent*)event {
+    UITouch *touch = [[event allTouches] anyObject];
+    CGPoint location = [touch locationInView:self.view];
+    CGRect rect;
+    rect.origin.x = location.x;
+    rect.origin.y = location.y;
+    rect.size.width = 5;
+    rect.size.height = 5;
+    return rect;
+}
+
 @end

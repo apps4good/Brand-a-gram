@@ -31,35 +31,59 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import <Twitter/Twitter.h>
 #import <Accounts/Accounts.h>
+#import "FBConnect.h"
 
 @protocol A4GShareControllerDelegate;
 
 @interface A4GShareController : NSObject<UIAlertViewDelegate,
-UIActionSheetDelegate,
-UIPrintInteractionControllerDelegate,
-MFMailComposeViewControllerDelegate,
-MFMessageComposeViewControllerDelegate>
+                                         UIActionSheetDelegate,
+                                         UIPrintInteractionControllerDelegate,
+                                         UIDocumentInteractionControllerDelegate,
+                                         MFMailComposeViewControllerDelegate,
+                                         MFMessageComposeViewControllerDelegate,
+                                         FBDialogDelegate, 
+                                         FBSessionDelegate>
 
 - (id) initWithController:(UIViewController<A4GShareControllerDelegate>*)controller;
-- (void) showActionsForEvent:(UIEvent*)event;
+
+- (void) shareForEvent:(UIEvent*)event 
+                  open:(BOOL)open
+                 print:(BOOL)print 
+                  copy:(BOOL)copy 
+                   sms:(BOOL)sms
+                 email:(BOOL)email
+               twitter:(BOOL)twitter
+              facebook:(bool)facebook;
+
+- (BOOL) canCallNumber:(NSString*)number;
+- (void) callNumber:(NSString *)number;
 
 - (BOOL) canPrintText;
-- (BOOL) canCopyText;
-- (BOOL) canSendSMS;
-- (BOOL) canSendEmail;
-- (BOOL) canSendTweet;
-- (BOOL) canCallNumber:(NSString*)number;
-- (BOOL) canOpenURL:(NSString*)url;
+- (void) printData:(NSData*)data withTitle:(NSString*)title;
+- (void) printText:(NSString*)text withTitle:(NSString*)title;
 
-- (void) callNumber:(NSString *)number;
-- (void) openURL:(NSString *)url;
+- (BOOL) canCopyText;
 - (void) copyText:(NSString *)string;
+
+- (BOOL) canSendSMS;
+- (void) sendSMS:(NSString *)message;
+
+- (BOOL) canSendEmail;
+- (void) sendEmail:(NSString*)message withSubject:(NSString *)subject addAttachment:(NSData*)attachment fileName:(NSString*)fileName toRecipient:(NSString*)recipient;
+- (void) sendEmail:(NSString*)message withSubject:(NSString *)subject addAttachment:(NSData*)attachment fileName:(NSString*)fileName toRecipients:(NSArray*)recipients;
+
+- (BOOL) canSendTweet;
 - (void) sendTweet:(NSString*)tweet withURL:(NSString*)url;
 - (void) sendTweet:(NSString*)tweet withImage:(UIImage*)image;
-- (void) printText:(NSString*)text withTitle:(NSString*)title;
-- (void) sendEmail:(NSString*)message withSubject:(NSString *)subject toRecipient:(NSString*)recipient;
-- (void) sendEmail:(NSString*)message withSubject:(NSString *)subject toRecipient:(NSString*)recipient withAttachment:(NSData*)data andFileName:(NSString*)fileName;
-- (void) sendSMS:(NSString *)message;
+
+- (BOOL) canOpenURL:(NSString*)url;
+- (void) openURL:(NSString *)url;
+
+- (BOOL) canOpenIn:(NSString *)url;
+- (BOOL) canOpenInWithUrl:(NSURL *)url;
+- (void) showOpenInWithUrl:(NSString*)url;
+
+- (void) shareFacebook:(NSString *)name caption:(NSString*)caption description:(NSString *)description link:(NSString*)link;
 
 @end
 
@@ -67,11 +91,14 @@ MFMessageComposeViewControllerDelegate>
 
 @optional
 
-- (void) share:(A4GShareController*)share willCallNumber:(NSString**)number;
-- (void) share:(A4GShareController*)share willCopyText:(NSString**)text;
-- (void) share:(A4GShareController*)share willSendTweet:(NSString**)tweet withURL:(NSString**)url;
-- (void) share:(A4GShareController*)share willPrintText:(NSString**)text withTitle:(NSString**)title;
-- (void) share:(A4GShareController*)share willSendEmail:(NSString**)message withSubject:(NSString**)subject toRecipients:(NSArray**)recipients;
-- (void) share:(A4GShareController*)share willSendSMS:(NSString**)message;
+- (void) shareOpenIn:(A4GShareController*)share;
+- (void) shareOpenURL:(A4GShareController*)share;
+- (void) sharePrintText:(A4GShareController*)share;
+- (void) shareCopyText:(A4GShareController*)share;
+- (void) shareSendSMS:(A4GShareController*)share;
+- (void) shareSendEmail:(A4GShareController*)share;
+- (void) shareSendTweet:(A4GShareController*)share;
+- (void) sharePostFacebook:(A4GShareController*)share;
+- (void) shareShowQRCode:(A4GShareController*)share;
 
 @end

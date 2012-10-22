@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FBConnect.h"
 
 @class A4GCameraViewController;
 @class A4GPreviewViewController;
 @class A4GAboutViewController;
 
-@interface A4GAppDelegate : UIResponder <UIApplicationDelegate>
+@interface A4GAppDelegate : UIResponder <UIApplicationDelegate, FBSessionDelegate>
 
 @property (strong, nonatomic) IBOutlet UIWindow *window;
 @property (strong, nonatomic) IBOutlet A4GCameraViewController *cameraViewController;

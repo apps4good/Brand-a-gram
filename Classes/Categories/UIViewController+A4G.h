@@ -37,5 +37,6 @@
 - (void) animatePageCurl:(BOOL)up fillMode:(NSString*)fillMode type:(NSString*)type duration:(CGFloat)duration;
 - (CGRect) touchOfEvent:(UIEvent*)event;
 - (UIBarButtonItem *) barButtonWithItems:(UIBarButtonItem*)item, ... NS_REQUIRES_NIL_TERMINATION; 
+- (CGRect) touchForEvent:(UIEvent*)event;
 
 @end

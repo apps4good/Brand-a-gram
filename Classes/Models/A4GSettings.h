@@ -59,6 +59,16 @@
 
 + (UIColor *) tableGroupedHeaderTextColor;
 
-+ (NSArray *) kmlFiles;
++(NSString*)facebookAppID;
++(NSString*)facebookAppSecret;
+
++(NSString*)facebookTokenKey;
++(void)setFacebookTokenKey:(NSString*)tokenKey;
+
++(NSDate*)facebookDateKey;
++(void)setFacebookDateKey:(NSDate*)dateKey;
+
++(BOOL)facebookAuthorizing;
++(void)setFacebookAuthorizing:(BOOL)facebookAuthorizing;
 
 @end

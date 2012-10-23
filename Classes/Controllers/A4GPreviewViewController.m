@@ -33,6 +33,8 @@
 
 @property (strong, nonatomic) A4GShareController *shareController;
 
+-(void)saved:(UIImage *)image error:(NSError *)error context:(void *)contextInfo;
+
 @end
 
 @implementation A4GPreviewViewController
@@ -40,7 +42,7 @@
 @synthesize imageView = _imageView;
 @synthesize image = _image;
 @synthesize shareController = _shareController;
-
+@synthesize containerView = _containerView;
 #pragma mark - IBActions
 
 - (IBAction)twitter:(id)sender event:(UIEvent*)event {
@@ -66,12 +68,28 @@
                         toRecipient:nil];
 }
 
+- (IBAction)save:(id)sender event:(UIEvent*)event {
+    [self showLoadingWithMessage:NSLocalizedString(@"Saving...", nil)];
+    [self performSelectorInBackground:@selector(saveImage:) withObject:self.image];
+}
+
+- (void) saveImage:(UIImage*)image {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(saved:error:context:), image);
+    [pool release];
+}
+
+-(void)saved:(UIImage *)image error:(NSError *)error context:(void *)contextInfo {
+    [self performSelectorOnMainThread:@selector(hideLoading) withObject:nil waitUntilDone:YES];
+}
+
 #pragma mark - UIViewController
 
 - (void)dealloc {
     [_image release];
     [_imageView release];
     [_shareController release];
+    [_containerView release];
     [super dealloc];
 }
 
@@ -85,6 +103,13 @@
         self.navigationItem.title = [A4GSettings appName];
     }
     self.shareController = [[A4GShareController alloc] initWithController:self];
+    self.imageView.backgroundColor = [UIColor clearColor];
+    CGRect frame = self.imageView.frame;
+    frame.size.width = self.containerView.frame.size.width;
+    frame.size.height = frame.size.width;
+    frame.origin.x = 0;
+    frame.origin.y = (self.containerView.frame.size.height - frame.size.height) / 2;
+    self.imageView.frame = frame;
 }
 
 - (void)viewDidUnload {

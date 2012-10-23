@@ -31,7 +31,7 @@
 #import "A4GAboutViewController.h"
 #import "A4GSettings.h"
 #import "UIColor+A4G.h"
-
+#import "UIAlertView+A4G.h"
 
 @interface A4GCameraViewController ()
 
@@ -64,7 +64,7 @@
 @synthesize captureDevice = _captureDevice;
 @synthesize deviceInput = _deviceInput;
 @synthesize stillImageOutput = _stillImageOutput;
-
+@synthesize containerView = _containerView;
 @synthesize captureSession = _captureSession;
 @synthesize previewLayer = _previewLayer;
 
@@ -103,9 +103,16 @@
             }
             else {
                 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
-                UIImage *image = [[UIImage alloc] initWithData:imageData];
-                UIImage *overlay = [UIImage imageNamed:[self.overlays objectAtIndex:self.pageControl.currentPage]];
+                UIImage *image = [[[UIImage alloc] initWithData:imageData] autorelease];
+                UIImage *overlay = self.overlayView.image;
                 self.previewViewController.image = [self mergeImage:image withImage:overlay];
+                DLog(@"Size:%@", NSStringFromCGSize(self.previewViewController.image.size));
+//                [UIAlertView showWithTitle:@"Merged Size" 
+//                                   message:NSStringFromCGSize(self.previewViewController.image.size) 
+//                                  delegate:self 
+//                                       tag:0 
+//                         cancelButtonTitle:@"OK" 
+//                         otherButtonTitles:nil];
                 [self.navigationController pushViewController:self.previewViewController animated:YES];            
             }
          }];
@@ -129,6 +136,7 @@
     [_overlays release];
     [_captureDevice release];
     [_deviceInput release];
+    [_containerView release];
     [super dealloc];
 }
 
@@ -144,6 +152,11 @@
         self.navigationItem.title = [A4GSettings appName];
     }
     
+    CGRect frame = self.containerView.frame;
+    frame.size.height = frame.size.width;
+    frame.origin.y = (self.view.frame.size.height - frame.size.height) / 2;
+    self.containerView.frame = frame;
+    
     self.overlays = [A4GSettings overlays];
     self.overlayView.image = [UIImage imageNamed:[self.overlays objectAtIndex:0]];
     self.pageControl.numberOfPages = self.overlays.count;
@@ -154,9 +167,9 @@
     self.captureSession.sessionPreset = AVCaptureSessionPresetHigh;
     self.captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
-    self.previewLayer.videoGravity = AVLayerVideoGravityResize;
     self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.captureSession];
     self.previewLayer.frame = self.cameraView.frame;
+    self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     [self.cameraView.layer addSublayer:self.previewLayer];
     
     self.stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
@@ -170,6 +183,7 @@
 		DLog(@"ERROR: %@", error);
 	}
 	[self.captureSession addInput:self.deviceInput];
+    
     
     self.swipeLeftRecognizer = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft:)] autorelease];
     self.swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -234,16 +248,7 @@
 }
 
 - (UIImage*)mergeImage:(UIImage*)first withImage:(UIImage*)second {
-    CGImageRef firstImageRef = first.CGImage;
-    CGFloat firstWidth = CGImageGetWidth(firstImageRef);
-    CGFloat firstHeight = CGImageGetHeight(firstImageRef);
-    
-    CGImageRef secondImageRef = second.CGImage;
-    CGFloat secondWidth = CGImageGetWidth(secondImageRef);
-    CGFloat secondHeight = CGImageGetHeight(secondImageRef);
-    
-    CGSize mergedSize = CGSizeMake(MAX(firstWidth, secondWidth), MAX(firstHeight, secondHeight));
-    
+    CGSize mergedSize = CGSizeMake(second.size.width, second.size.height);
     UIGraphicsBeginImageContext(mergedSize);
     
     [first drawInRect:CGRectMake(0, 0, mergedSize.width, mergedSize.height)];

@@ -33,10 +33,12 @@
 @interface A4GPreviewViewController : A4GViewController<A4GShareControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) UIImage *image;
 
 - (IBAction)twitter:(id)sender event:(UIEvent*)event;
 - (IBAction)facebook:(id)sender event:(UIEvent*)event;
 - (IBAction)email:(id)sender event:(UIEvent*)event;
+- (IBAction)save:(id)sender event:(UIEvent*)event;
 
 @end

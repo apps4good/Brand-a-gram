@@ -42,6 +42,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *overlayView;
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong, nonatomic) IBOutlet UIView *cameraView;
+@property (strong, nonatomic) IBOutlet UIView *containerView;
 
 - (IBAction)about:(id)sender event:(UIEvent*)event;
 - (IBAction)camera:(id)sender event:(UIEvent*)event;

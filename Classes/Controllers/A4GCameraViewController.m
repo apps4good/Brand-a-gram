@@ -45,9 +45,12 @@
 @property (strong, nonatomic) UISwipeGestureRecognizer * swipeRightRecognizer;
 @property (strong, nonatomic) NSArray *overlays;
 
+@property (strong, nonatomic) NSNumber *latitude;
+@property (strong, nonatomic) NSNumber *longitude;
+
 - (void)swipeLeft:(UISwipeGestureRecognizer *)recognizer;
 - (void)swipeRight:(UISwipeGestureRecognizer *)recognizer;
-- (UIImage*)mergeImage:(UIImage*)first withImage:(UIImage*)second;
+- (UIImage*) mergeImage:(UIImage*)first image:(UIImage*)second description:(NSString*)description latitude:(NSNumber*)latitude longitude:(NSNumber*)longitude;
 
 @end
 
@@ -67,6 +70,8 @@
 @synthesize containerView = _containerView;
 @synthesize captureSession = _captureSession;
 @synthesize previewLayer = _previewLayer;
+@synthesize latitude = _latitude;
+@synthesize longitude = _longitude;
 
 #pragma mark - IBActions
 
@@ -88,16 +93,14 @@
 		}
 		if (videoConnection) { break; }
 	}
+//    UIImage *image = self.overlayView.image;
+//    [self addExifForImage:image description:[A4GSettings appText] latitude:self.latitude longitude:self.longitude];
+//    self.previewViewController.image = image;
+//    [self.navigationController pushViewController:self.previewViewController animated:YES]; 
+    
     if (videoConnection != nil) {
         [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageSampleBuffer, NSError *error) {
             DLog(@"");
-//            CFDictionaryRef exif = CMGetAttachment(imageSampleBuffer, kCGImagePropertyExifDictionary, NULL);
-//            if (exif) {
-//                DLog(@"EXIF: %@", exif);
-//            }
-//            else
-//                DLog(@"No EXIF");
-//            }
             if (error) {
                 DLog(@"Error:%@", [error description]);
             }
@@ -105,14 +108,12 @@
                 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
                 UIImage *image = [[[UIImage alloc] initWithData:imageData] autorelease];
                 UIImage *overlay = self.overlayView.image;
-                self.previewViewController.image = [self mergeImage:image withImage:overlay];
+                self.previewViewController.image = [self mergeImage:image 
+                                                              image:overlay 
+                                                        description:[A4GSettings appText] 
+                                                           latitude:self.latitude 
+                                                          longitude:self.longitude];
                 DLog(@"Size:%@", NSStringFromCGSize(self.previewViewController.image.size));
-//                [UIAlertView showWithTitle:@"Merged Size" 
-//                                   message:NSStringFromCGSize(self.previewViewController.image.size) 
-//                                  delegate:self 
-//                                       tag:0 
-//                         cancelButtonTitle:@"OK" 
-//                         otherButtonTitles:nil];
                 [self.navigationController pushViewController:self.previewViewController animated:YES];            
             }
          }];
@@ -203,6 +204,8 @@
     [self.view addGestureRecognizer:self.swipeLeftRecognizer];
     [self.view addGestureRecognizer:self.swipeRightRecognizer];
     [self.captureSession startRunning]; 
+    
+    [[A4GLocator sharedInstance] locateForDelegate:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -247,17 +250,68 @@
     }
 }
 
-- (UIImage*)mergeImage:(UIImage*)first withImage:(UIImage*)second {
+- (UIImage*)mergeImage:(UIImage*)first image:(UIImage*)second description:(NSString*)description latitude:(NSNumber*)latitude longitude:(NSNumber*)longitude {
     CGSize mergedSize = CGSizeMake(second.size.width, second.size.height);
     UIGraphicsBeginImageContext(mergedSize);
     
     [first drawInRect:CGRectMake(0, 0, mergedSize.width, mergedSize.height)];
     [second drawInRect:CGRectMake(0, 0, mergedSize.width, mergedSize.height)]; 
     
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage *mergedImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    return newImage;
+    NSData *jpeg = UIImageJPEGRepresentation(mergedImage, 1.0);
+    CGImageSourceRef  source = CGImageSourceCreateWithData((CFDataRef)jpeg, NULL);
+    
+    NSDictionary *metadata = (NSDictionary *) CGImageSourceCopyPropertiesAtIndex(source, 0, NULL);
+    NSMutableDictionary *metadataAsMutable = [[metadata mutableCopy]autorelease];
+    [metadata release];
+    
+    NSMutableDictionary *gps = [[[metadataAsMutable objectForKey:(NSString *)kCGImagePropertyGPSDictionary]mutableCopy]autorelease];
+    if(!gps) {
+        gps = [NSMutableDictionary dictionary];
+    }
+    [gps setValue:latitude forKey:(NSString*)kCGImagePropertyGPSLatitude];
+    [gps setValue:longitude forKey:(NSString*)kCGImagePropertyGPSLongitude];
+    
+    NSMutableDictionary *exif = [[[metadataAsMutable objectForKey:(NSString *)kCGImagePropertyExifDictionary]mutableCopy]autorelease];
+    if(!exif) {
+        exif = [NSMutableDictionary dictionary];
+    }
+    [exif setValue:description forKey:(NSString *)kCGImagePropertyExifUserComment];
+    
+    [metadataAsMutable setObject:exif forKey:(NSString *)kCGImagePropertyExifDictionary];
+    [metadataAsMutable setObject:gps forKey:(NSString *)kCGImagePropertyGPSDictionary];
+    
+    CFStringRef uti = CGImageSourceGetType(source); 
+    NSMutableData *data = [NSMutableData data];
+    
+    CGImageDestinationRef destination = CGImageDestinationCreateWithData((CFMutableDataRef)data,uti,1,NULL);
+    if(!destination) {
+        DLog(@"***Could not create image destination ***");
+    }
+    
+    CGImageDestinationAddImageFromSource(destination, source, 0, (CFDictionaryRef) metadataAsMutable);
+    if(!CGImageDestinationFinalize(destination)) {
+        DLog(@"***Could not create data from image destination ***");
+    }
+    
+    CFRelease(destination);
+    CFRelease(source);
+    
+    return mergedImage;
+}
+
+#pragma mark - A4GLocator
+
+- (void) locateFinished:(A4GLocator *)locator latitude:(NSNumber *)latitude longitude:(NSNumber *)longitude {
+    DLog(@"%@,%@", latitude, longitude);
+    self.latitude = latitude;
+    self.longitude = longitude;
+}
+
+- (void) locateFailed:(A4GLocator *)locator error:(NSError *)error {
+    DLog(@"Error:%@", [error description]);
 }
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E00265916379EB100857525 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E00265816379EB100857525 /* ImageIO.framework */; };
 		3E4AFAB016333CCB0016F47C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4AFAAF16333CCB0016F47C /* UIKit.framework */; };
 		3E4AFAB216333CCB0016F47C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4AFAB116333CCB0016F47C /* Foundation.framework */; };
 		3E4AFAB416333CCB0016F47C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4AFAB316333CCB0016F47C /* CoreGraphics.framework */; };
@@ -120,6 +121,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E00265816379EB100857525 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		3E4AFAAB16333CCB0016F47C /* Apps4Good.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Apps4Good.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E4AFAAF16333CCB0016F47C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3E4AFAB116333CCB0016F47C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -292,6 +294,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E00265916379EB100857525 /* ImageIO.framework in Frameworks */,
 				3E4AFBA716337E9A0016F47C /* AVFoundation.framework in Frameworks */,
 				3E4AFBA516337E8F0016F47C /* CoreMedia.framework in Frameworks */,
 				3E4AFB2C163346820016F47C /* QuartzCore.framework in Frameworks */,
@@ -331,6 +334,7 @@
 		3E4AFAAE16333CCB0016F47C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3E00265816379EB100857525 /* ImageIO.framework */,
 				3E4AFBA616337E980016F47C /* AVFoundation.framework */,
 				3E4AFBA416337E8C0016F47C /* CoreMedia.framework */,
 				3E4AFB2B163346810016F47C /* QuartzCore.framework */,

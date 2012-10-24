@@ -31,11 +31,13 @@
 #import <CoreMedia/CoreMedia.h>
 #import <AVFoundation/AVFoundation.h>
 #import "A4GViewController.h"
+#import "A4GLocator.h"
 
 @class A4GPreviewViewController;
 @class A4GAboutViewController;
 
-@interface A4GCameraViewController : A4GViewController<UINavigationControllerDelegate>
+@interface A4GCameraViewController : A4GViewController<A4GLocatorDelegate,
+                                                       UINavigationControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet A4GPreviewViewController *previewViewController;
 @property (strong, nonatomic) IBOutlet A4GAboutViewController *aboutViewController;

@@ -64,7 +64,7 @@
     [self.shareController sendEmail:nil 
                         withSubject:[A4GSettings appName] 
                       addAttachment:data 
-                           fileName:NSLocalizedString(@"%@.jpg", [A4GSettings appName]) 
+                           fileName:[NSString stringWithFormat:@"%@.jpg", [A4GSettings appName]]
                         toRecipient:nil];
 }
 

@@ -57,7 +57,7 @@
 							</object>
 							<object class="IBUIImageView" id="638360179">
 								<reference key="NSNextResponder" ref="766583253"/>
-								<int key="NSvFlags">314</int>
+								<int key="NSvFlags">274</int>
 								<string key="NSFrame">{{0, 48}, {320, 320}}</string>
 								<reference key="NSSuperview" ref="766583253"/>
 								<reference key="NSWindow"/>
@@ -67,7 +67,6 @@
 									<bytes key="NSWhite">MAA</bytes>
 								</object>
 								<bool key="IBUIOpaque">NO</bool>
-								<int key="IBUIContentMode">1</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>

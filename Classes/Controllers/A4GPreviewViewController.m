@@ -104,12 +104,6 @@
     }
     self.shareController = [[A4GShareController alloc] initWithController:self];
     self.imageView.backgroundColor = [UIColor clearColor];
-    CGRect frame = self.imageView.frame;
-    frame.size.width = self.containerView.frame.size.width;
-    frame.size.height = frame.size.width;
-    frame.origin.x = 0;
-    frame.origin.y = (self.containerView.frame.size.height - frame.size.height) / 2;
-    self.imageView.frame = frame;
 }
 
 - (void)viewDidUnload {
@@ -118,7 +112,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    CGRect frame = self.imageView.frame;
+    frame.size.width = self.containerView.frame.size.width;
+    frame.size.height = frame.size.width;
+    frame.origin.x = 0;
+    frame.origin.y = (self.containerView.frame.size.height - frame.size.height) / 2;
+    self.imageView.frame = frame;
     self.imageView.image = self.image;
+    DLog(@"Preview:%@", NSStringFromCGSize(self.imageView.frame.size));
 }
 
 - (void)viewDidAppear:(BOOL)animated {

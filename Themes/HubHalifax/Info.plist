@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Apps4Good</string>
+	<string>HubHalifax</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>
@@ -27,7 +27,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Apps4Good</string>
+	<string>HubHalifax</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -76,7 +76,7 @@
 	<key>A4GAppURL</key>
 	<string>http://apps4good.ca/apps/brandagram</string>
 	<key>A4GButtonDoneColor</key>
-	<string>#FFFFFF</string>
+	<string>#848484</string>
 	<key>A4GNavBarColor</key>
 	<string>#832a27</string>
 	<key>A4GToolBarColor</key>

@@ -32,6 +32,7 @@
 #import "A4GSettings.h"
 #import "UIColor+A4G.h"
 #import "UIAlertView+A4G.h"
+#import "A4GLoadingView.h"
 
 @interface A4GCameraViewController ()
 
@@ -93,10 +94,8 @@
 		}
 		if (videoConnection) { break; }
 	}
-//    UIImage *image = self.overlayView.image;
-//    [self addExifForImage:image description:[A4GSettings appText] latitude:self.latitude longitude:self.longitude];
-//    self.previewViewController.image = image;
-//    [self.navigationController pushViewController:self.previewViewController animated:YES]; 
+
+    [self showLoadingWithMessage:NSLocalizedString(@"Capturing...", nil)];
     
     if (videoConnection != nil) {
         [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageSampleBuffer, NSError *error) {
@@ -105,15 +104,18 @@
                 DLog(@"Error:%@", [error description]);
             }
             else {
+                [self showLoadingWithMessage:NSLocalizedString(@"Processing...", nil)];
                 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
                 UIImage *image = [[[UIImage alloc] initWithData:imageData] autorelease];
+                DLog(@"Image:%@", NSStringFromCGSize(image.size));
                 UIImage *overlay = self.overlayView.image;
+                DLog(@"Overlay:%@", NSStringFromCGSize(overlay.size));
                 self.previewViewController.image = [self mergeImage:image 
                                                               image:overlay 
                                                         description:[A4GSettings appText] 
                                                            latitude:self.latitude 
                                                           longitude:self.longitude];
-                DLog(@"Size:%@", NSStringFromCGSize(self.previewViewController.image.size));
+                DLog(@"Merged:%@", NSStringFromCGSize(self.previewViewController.image.size));
                 [self.navigationController pushViewController:self.previewViewController animated:YES];            
             }
          }];
@@ -165,12 +167,12 @@
     self.cameraView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     self.captureSession = [[AVCaptureSession alloc] init];
-    self.captureSession.sessionPreset = AVCaptureSessionPresetHigh;
+    self.captureSession.sessionPreset = AVCaptureSessionPresetPhoto;
     self.captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
     self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.captureSession];
     self.previewLayer.frame = self.cameraView.frame;
-    self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    self.previewLayer.videoGravity = AVLayerVideoGravityResize;
     [self.cameraView.layer addSublayer:self.previewLayer];
     
     self.stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
@@ -216,6 +218,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     DLog(@"");
+    [self hideLoading];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

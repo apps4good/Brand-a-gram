@@ -52,7 +52,18 @@
 - (void)swipeLeft:(UISwipeGestureRecognizer *)recognizer;
 - (void)swipeRight:(UISwipeGestureRecognizer *)recognizer;
 
+- (void) captureImage;
+- (void) captureImageInBackground;
+
+- (void) processImage:(UIImage*)image;
+- (void) processImageInBackground:(UIImage*)image;
+
+- (void) saveImage:(UIImage*)image;
+- (void) saveImageInBackground:(UIImage*)image;
+
+- (void)savedImage:(UIImage *)image error:(NSError *)error context:(void *)contextInfo;
 - (UIImage*)mergeImage:(UIImage*)image overlay:(UIImage*)overlay description:(NSString*)description latitude:(NSNumber*)latitude longitude:(NSNumber*)longitude;
+
 @end
 
 @implementation A4GCameraViewController
@@ -84,6 +95,16 @@
 
 - (IBAction)camera:(id)sender event:(UIEvent*)event {
     DLog(@"");
+    [self captureImage];
+}
+
+- (void) captureImage {
+    [self showLoadingWithMessage:NSLocalizedString(@"Capturing...", nil)];
+    [self performSelector:@selector(captureImageInBackground) withObject:nil afterDelay:0.2];
+}
+
+- (void) captureImageInBackground {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     AVCaptureConnection *videoConnection = nil;
 	for (AVCaptureConnection *connection in self.stillImageOutput.connections) {
 		for (AVCaptureInputPort *port in [connection inputPorts]) {
@@ -94,9 +115,6 @@
 		}
 		if (videoConnection) { break; }
 	}
-
-    [self showLoadingWithMessage:NSLocalizedString(@"Processing...", nil)];
-    
     if (videoConnection != nil) {
         [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageSampleBuffer, NSError *error) {
             DLog(@"");
@@ -107,23 +125,49 @@
             else {
                 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
                 UIImage *image = [[[UIImage alloc] initWithData:imageData] autorelease];
-                DLog(@"Image:%@", NSStringFromCGSize(image.size));
-                UIImage *overlay = self.overlayView.image;
-                DLog(@"Overlay:%@", NSStringFromCGSize(overlay.size));
-                self.previewViewController.image = [self mergeImage:image 
-                                                            overlay:overlay 
-                                                        description:[A4GSettings appText] 
-                                                           latitude:self.latitude 
-                                                          longitude:self.longitude];
-                DLog(@"Merged:%@", NSStringFromCGSize(self.previewViewController.image.size));
-                [self.navigationController pushViewController:self.previewViewController animated:YES];            
+                [self performSelectorOnMainThread:@selector(processImage:) withObject:image waitUntilDone:YES];
             }
-         }];
+        }];
     }
-    else {
-        self.previewViewController.image = nil;
-        [self.navigationController pushViewController:self.previewViewController animated:YES]; 
-    }
+    [pool release];
+}
+
+- (void)processImage:(UIImage*)image {
+    [self showLoadingWithMessage:NSLocalizedString(@"Processing...", nil)];
+    [self performSelector:@selector(processImageInBackground:) withObject:image afterDelay:0.2];
+}
+
+- (void)processImageInBackground:(UIImage*)image {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    DLog(@"Image:%@", NSStringFromCGSize(image.size));
+    UIImage *overlay = self.overlayView.image;
+    DLog(@"Overlay:%@", NSStringFromCGSize(overlay.size));
+    UIImage *merged = [self mergeImage:image 
+                               overlay:overlay 
+                           description:[A4GSettings appText] 
+                              latitude:self.latitude 
+                             longitude:self.longitude];
+    DLog(@"Merged:%@", NSStringFromCGSize(merged.size));
+    [self performSelectorOnMainThread:@selector(saveImage:) withObject:merged waitUntilDone:YES];
+    [pool release];
+}
+
+- (void) saveImage:(UIImage*)image {
+    [self showLoadingWithMessage:NSLocalizedString(@"Saving...", nil)];
+    [self performSelector:@selector(saveImageInBackground:) withObject:image afterDelay:0.2];
+}
+
+- (void) saveImageInBackground:(UIImage*)image {
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(savedImage:error:context:), image);
+    [pool release];
+}
+
+- (void)savedImage:(UIImage *)image error:(NSError *)error context:(void *)contextInfo {
+    DLog(@"");
+    self.previewViewController.image = image;
+    [self.navigationController pushViewController:self.previewViewController animated:YES];
+    [self hideLoading];
 }
 
 #pragma mark - UIViewController

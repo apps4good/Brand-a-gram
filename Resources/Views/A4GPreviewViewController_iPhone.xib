@@ -90,7 +90,6 @@
 						<string key="NSFrame">{{0, 416}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -126,19 +125,6 @@
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">email.png</string>
-								</object>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<reference key="IBUIToolbar" ref="360817270"/>
-							</object>
-							<object class="IBUIBarButtonItem" id="958366520">
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<reference key="IBUIToolbar" ref="360817270"/>
-								<int key="IBUISystemItemIdentifier">5</int>
-							</object>
-							<object class="IBUIBarButtonItem" id="475957600">
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">save.png</string>
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIToolbar" ref="360817270"/>
@@ -219,14 +205,6 @@
 					</object>
 					<int key="connectionID">14</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">save:event:</string>
-						<reference key="source" ref="475957600"/>
-						<reference key="destination" ref="372490531"/>
-					</object>
-					<int key="connectionID">27</int>
-				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -265,8 +243,6 @@
 							<reference ref="822912945"/>
 							<reference ref="50103384"/>
 							<reference ref="1047371179"/>
-							<reference ref="475957600"/>
-							<reference ref="958366520"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -314,16 +290,6 @@
 						<reference key="object" ref="638360179"/>
 						<reference key="parent" ref="766583253"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">25</int>
-						<reference key="object" ref="475957600"/>
-						<reference key="parent" ref="360817270"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">26</int>
-						<reference key="object" ref="958366520"/>
-						<reference key="parent" ref="360817270"/>
-					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -336,8 +302,6 @@
 				<string key="11.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="22.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="23.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="25.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="26.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -358,7 +322,6 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="email:event:">id</string>
 						<string key="facebook:event:">id</string>
-						<string key="save:event:">id</string>
 						<string key="twitter:event:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -368,10 +331,6 @@
 						</object>
 						<object class="IBActionInfo" key="facebook:event:">
 							<string key="name">facebook:event:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="save:event:">
-							<string key="name">save:event:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="twitter:event:">
@@ -430,7 +389,6 @@
 			<string key="background.png">{256, 256}</string>
 			<string key="email.png">{20, 20}</string>
 			<string key="facebook.png">{20, 20}</string>
-			<string key="save.png">{20, 20}</string>
 			<string key="twitter.png">{20, 20}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">933</string>

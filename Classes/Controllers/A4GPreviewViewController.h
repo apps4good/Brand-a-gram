@@ -39,6 +39,5 @@
 - (IBAction)twitter:(id)sender event:(UIEvent*)event;
 - (IBAction)facebook:(id)sender event:(UIEvent*)event;
 - (IBAction)email:(id)sender event:(UIEvent*)event;
-- (IBAction)save:(id)sender event:(UIEvent*)event;
 
 @end

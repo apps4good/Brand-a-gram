@@ -91,13 +91,15 @@
 		}
 		self.activityIndicator.hidden = !animated;
         self.activityIndicatorLabel.text = message;
+        [self.activityIndicatorLabel setNeedsDisplay];
 	}
 	else {
         if (self.superview == nil) {
 			[self.controller.view performSelectorOnMainThread:@selector(addSubview:) withObject:self waitUntilDone:NO];
 			[self performSelectorOnMainThread:@selector(centerView) withObject:nil waitUntilDone:NO];
             [self.activityIndicatorLabel performSelectorOnMainThread:@selector(setText:) withObject:message waitUntilDone:NO];
-		}
+            [self.activityIndicatorLabel performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:NO];
+        }
 		[self.activityIndicatorLabel performSelectorOnMainThread:@selector(setText:) withObject:message waitUntilDone:NO];
 	}
 }

@@ -51,8 +51,8 @@
 
 - (void)swipeLeft:(UISwipeGestureRecognizer *)recognizer;
 - (void)swipeRight:(UISwipeGestureRecognizer *)recognizer;
-- (UIImage*) mergeImage:(UIImage*)first image:(UIImage*)second description:(NSString*)description latitude:(NSNumber*)latitude longitude:(NSNumber*)longitude;
 
+- (UIImage*)mergeImage:(UIImage*)image overlay:(UIImage*)overlay description:(NSString*)description latitude:(NSNumber*)latitude longitude:(NSNumber*)longitude;
 @end
 
 @implementation A4GCameraViewController
@@ -95,23 +95,23 @@
 		if (videoConnection) { break; }
 	}
 
-    [self showLoadingWithMessage:NSLocalizedString(@"Capturing...", nil)];
+    [self showLoadingWithMessage:NSLocalizedString(@"Processing...", nil)];
     
     if (videoConnection != nil) {
         [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageSampleBuffer, NSError *error) {
             DLog(@"");
             if (error) {
                 DLog(@"Error:%@", [error description]);
+                [self hideLoading];
             }
             else {
-                [self showLoadingWithMessage:NSLocalizedString(@"Processing...", nil)];
                 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
                 UIImage *image = [[[UIImage alloc] initWithData:imageData] autorelease];
                 DLog(@"Image:%@", NSStringFromCGSize(image.size));
                 UIImage *overlay = self.overlayView.image;
                 DLog(@"Overlay:%@", NSStringFromCGSize(overlay.size));
                 self.previewViewController.image = [self mergeImage:image 
-                                                              image:overlay 
+                                                            overlay:overlay 
                                                         description:[A4GSettings appText] 
                                                            latitude:self.latitude 
                                                           longitude:self.longitude];
@@ -155,11 +155,6 @@
         self.navigationItem.title = [A4GSettings appName];
     }
     
-    CGRect frame = self.containerView.frame;
-    frame.size.height = frame.size.width;
-    frame.origin.y = (self.view.frame.size.height - frame.size.height) / 2;
-    self.containerView.frame = frame;
-    
     self.overlays = [A4GSettings overlays];
     self.overlayView.image = [UIImage imageNamed:[self.overlays objectAtIndex:0]];
     self.pageControl.numberOfPages = self.overlays.count;
@@ -172,11 +167,11 @@
     
     self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.captureSession];
     self.previewLayer.frame = self.cameraView.frame;
-    self.previewLayer.videoGravity = AVLayerVideoGravityResize;
+    self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     [self.cameraView.layer addSublayer:self.previewLayer];
     
     self.stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
-    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
+    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, AVVideoScalingModeResizeAspectFill, AVVideoScalingModeKey, nil];
     [self.stillImageOutput setOutputSettings:outputSettings];
     [self.captureSession addOutput:self.stillImageOutput];
     
@@ -186,7 +181,6 @@
 		DLog(@"ERROR: %@", error);
 	}
 	[self.captureSession addInput:self.deviceInput];
-    
     
     self.swipeLeftRecognizer = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft:)] autorelease];
     self.swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -203,6 +197,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     DLog(@"");
+    CGRect frame = self.containerView.frame;
+    frame.size.height = frame.size.width;
+    frame.origin.y = (self.view.frame.size.height - frame.size.height) / 2;
+    self.containerView.frame = frame;
+    
     [self.view addGestureRecognizer:self.swipeLeftRecognizer];
     [self.view addGestureRecognizer:self.swipeRightRecognizer];
     [self.captureSession startRunning]; 
@@ -253,12 +252,18 @@
     }
 }
 
-- (UIImage*)mergeImage:(UIImage*)first image:(UIImage*)second description:(NSString*)description latitude:(NSNumber*)latitude longitude:(NSNumber*)longitude {
-    CGSize mergedSize = CGSizeMake(second.size.width, second.size.height);
-    UIGraphicsBeginImageContext(mergedSize);
+- (UIImage*)mergeImage:(UIImage*)image overlay:(UIImage*)overlay description:(NSString*)description latitude:(NSNumber*)latitude longitude:(NSNumber*)longitude {
+    UIGraphicsBeginImageContext(overlay.size);
+    DLog(@"Image:%f,%f", image.size.width, image.size.height);
     
-    [first drawInRect:CGRectMake(0, 0, mergedSize.width, mergedSize.height)];
-    [second drawInRect:CGRectMake(0, 0, mergedSize.width, mergedSize.height)]; 
+    CGFloat resizedWidth = overlay.size.width;
+    CGFloat resizedHeight = overlay.size.width * image.size.height / image.size.width;
+    
+    [image drawInRect:CGRectMake(0, 0, resizedWidth, resizedHeight)];
+    DLog(@"Resized:%f,%f", resizedWidth, resizedHeight);
+    
+    [overlay drawInRect:CGRectMake(0, 0, overlay.size.width, overlay.size.height)]; 
+    DLog(@"Overlay:%f,%f", overlay.size.width, overlay.size.height);
     
     UIImage *mergedImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();

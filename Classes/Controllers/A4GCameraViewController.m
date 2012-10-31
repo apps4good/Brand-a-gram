@@ -224,7 +224,12 @@
 	if (!self.deviceInput) {
 		DLog(@"ERROR: %@", error);
 	}
-	[self.captureSession addInput:self.deviceInput];
+    if ([self.captureSession canAddInput:self.deviceInput]) {
+        [self.captureSession addInput:self.deviceInput];
+    }
+    else {
+        DLog(@"Unable to add Input Device");
+    }
     
     self.swipeLeftRecognizer = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft:)] autorelease];
     self.swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;

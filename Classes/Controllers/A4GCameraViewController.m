@@ -425,6 +425,17 @@
     [pool release];
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"running"] ){
+        if (self.captureSession.running) {
+            [self hideLoading];
+        }
+        else {
+            [self showLoadingWithMessage:NSLocalizedString(@"Loading...", nil)];
+        }
+    }
+}
+
 #pragma mark - UIImage
 
 - (void)processImage:(UIImage*)image {
@@ -503,6 +514,8 @@
     
     [self initializeCaptureDevice];
     
+    [self.captureSession addObserver:self forKeyPath:@"running" options:NSKeyValueObservingOptionNew context:nil];
+     
     self.overlays = [A4GSettings overlays];
     self.overlayView.image = [UIImage imageNamed:[self.overlays objectAtIndex:0]];
     self.pageControl.numberOfPages = self.overlays.count;
@@ -515,6 +528,11 @@
     self.swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
 }
 
+- (void) viewDidUnload {
+    [super viewDidUnload];
+    [self.captureSession removeObserver:self forKeyPath:@"running"];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     DLog(@"");
@@ -525,6 +543,7 @@
     
     [self.view addGestureRecognizer:self.swipeLeftRecognizer];
     [self.view addGestureRecognizer:self.swipeRightRecognizer];
+    
     [self.captureSession startRunning]; 
     
     [[A4GLocator sharedInstance] locateForDelegate:self];

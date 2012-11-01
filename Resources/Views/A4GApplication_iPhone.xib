@@ -46,7 +46,7 @@
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MAA</bytes>
@@ -131,6 +131,7 @@
 								<string key="NSFrame">{{96, 6}, {128, 33}}</string>
 								<reference key="NSSuperview"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="792858983"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -149,11 +150,34 @@
 								<reference key="IBUIFontDescription" ref="668628428"/>
 								<reference key="IBUIFont" ref="307845557"/>
 							</object>
-							<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="860367509">
+							<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="598668153">
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIStyle">2</int>
+								<object class="IBUIButton" key="IBUICustomView" id="792858983">
+									<reference key="NSNextResponder"/>
+									<int key="NSvFlags">292</int>
+									<string key="NSFrame">{{293, 5}, {22, 33}}</string>
+									<reference key="NSSuperview"/>
+									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView"/>
+									<bool key="IBUIOpaque">NO</bool>
+									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+									<int key="IBUIContentHorizontalAlignment">0</int>
+									<int key="IBUIContentVerticalAlignment">0</int>
+									<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
+									<reference key="IBUIHighlightedTitleColor" ref="219398353"/>
+									<object class="NSColor" key="IBUINormalTitleColor">
+										<int key="NSColorSpace">1</int>
+										<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+									</object>
+									<reference key="IBUINormalTitleShadowColor" ref="1015587935"/>
+									<object class="NSCustomResource" key="IBUINormalImage">
+										<string key="NSClassName">NSImage</string>
+										<string key="NSResourceName">back.png</string>
+									</object>
+									<reference key="IBUIFontDescription" ref="668628428"/>
+									<reference key="IBUIFont" ref="307845557"/>
+								</object>
 								<reference key="IBUINavigationItem" ref="947171481"/>
-								<int key="IBUISystemItemIdentifier">15</int>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
@@ -170,13 +194,10 @@
 			</object>
 			<object class="IBUIViewController" id="606516475">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="998167319">
-					<reference key="IBUINavigationBar"/>
 					<object class="IBUIButton" key="IBUITitleView" id="648382439">
-						<reference key="NSNextResponder"/>
+						<nil key="NSNextResponder"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{96, 6}, {128, 33}}</string>
-						<reference key="NSSuperview"/>
-						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -293,12 +314,12 @@
 					<int key="connectionID">40</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">camera:event:</string>
-						<reference key="source" ref="860367509"/>
-						<reference key="destination" ref="1065172856"/>
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">directionButton</string>
+						<reference key="source" ref="1065172856"/>
+						<reference key="destination" ref="792858983"/>
 					</object>
-					<int key="connectionID">38</int>
+					<int key="connectionID">53</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -308,6 +329,15 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">43</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">direction:event:</string>
+						<reference key="source" ref="792858983"/>
+						<reference key="destination" ref="1065172856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">51</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -387,17 +417,12 @@
 						<int key="objectID">28</int>
 						<reference key="object" ref="947171481"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="860367509"/>
 							<reference ref="26090931"/>
 							<reference ref="143986844"/>
 							<reference ref="257365373"/>
+							<reference ref="598668153"/>
 						</array>
 						<reference key="parent" ref="1065172856"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">37</int>
-						<reference key="object" ref="860367509"/>
-						<reference key="parent" ref="947171481"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">39</int>
@@ -427,6 +452,19 @@
 						<reference key="object" ref="648382439"/>
 						<reference key="parent" ref="998167319"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">50</int>
+						<reference key="object" ref="598668153"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="792858983"/>
+						</array>
+						<reference key="parent" ref="947171481"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">49</int>
+						<reference key="object" ref="792858983"/>
+						<reference key="parent" ref="598668153"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -442,7 +480,6 @@
 				<string key="27.CustomClassName">A4GCameraViewController</string>
 				<string key="27.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="28.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="37.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="39.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.CustomClassName">A4GAppDelegate</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -450,6 +487,9 @@
 				<string key="42.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="44.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="45.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="49.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="0.0" key="49.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<string key="50.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="6.CustomClassName">A4GPreviewViewController</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="7.CustomClassName">A4GAboutViewController</string>
@@ -459,7 +499,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">45</int>
+			<int key="maxID">53</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -520,6 +560,11 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="about:event:">id</string>
 						<string key="camera:event:">id</string>
+						<string key="direction:event:">id</string>
+						<string key="exposure:event:">id</string>
+						<string key="flash:event:">id</string>
+						<string key="torch:event:">id</string>
+						<string key="whitebalance:event:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="about:event:">
@@ -530,19 +575,49 @@
 							<string key="name">camera:event:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="direction:event:">
+							<string key="name">direction:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="exposure:event:">
+							<string key="name">exposure:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="flash:event:">
+							<string key="name">flash:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="torch:event:">
+							<string key="name">torch:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="whitebalance:event:">
+							<string key="name">whitebalance:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="aboutViewController">A4GAboutViewController</string>
+						<string key="cameraButton">UIBarButtonItem</string>
 						<string key="cameraView">UIView</string>
 						<string key="containerView">UIView</string>
+						<string key="directionButton">UIButton</string>
+						<string key="exposureButton">UIBarButtonItem</string>
+						<string key="flashButton">UIBarButtonItem</string>
 						<string key="overlayView">UIImageView</string>
 						<string key="pageControl">UIPageControl</string>
 						<string key="previewViewController">A4GPreviewViewController</string>
+						<string key="torchButton">UIBarButtonItem</string>
+						<string key="whitebalanceButton">UIBarButtonItem</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="aboutViewController">
 							<string key="name">aboutViewController</string>
 							<string key="candidateClassName">A4GAboutViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="cameraButton">
+							<string key="name">cameraButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="cameraView">
 							<string key="name">cameraView</string>
@@ -551,6 +626,18 @@
 						<object class="IBToOneOutletInfo" key="containerView">
 							<string key="name">containerView</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="directionButton">
+							<string key="name">directionButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="exposureButton">
+							<string key="name">exposureButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="flashButton">
+							<string key="name">flashButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="overlayView">
 							<string key="name">overlayView</string>
@@ -564,6 +651,14 @@
 							<string key="name">previewViewController</string>
 							<string key="candidateClassName">A4GPreviewViewController</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="torchButton">
+							<string key="name">torchButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="whitebalanceButton">
+							<string key="name">whitebalanceButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
@@ -576,7 +671,6 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="email:event:">id</string>
 						<string key="facebook:event:">id</string>
-						<string key="save:event:">id</string>
 						<string key="twitter:event:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -586,10 +680,6 @@
 						</object>
 						<object class="IBActionInfo" key="facebook:event:">
 							<string key="name">facebook:event:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="save:event:">
-							<string key="name">save:event:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="twitter:event:">
@@ -663,10 +753,10 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">title.png</string>
-			<string key="NS.object.0">{140, 38}</string>
-		</object>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="back.png">{16, 19}</string>
+			<string key="title.png">{140, 38}</string>
+		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>
 </archive>

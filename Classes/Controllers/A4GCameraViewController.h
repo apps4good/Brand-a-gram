@@ -45,8 +45,19 @@
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong, nonatomic) IBOutlet UIView *cameraView;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *flashButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *torchButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *whitebalanceButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *exposureButton;
+@property (strong, nonatomic) IBOutlet UIButton *directionButton;
 
 - (IBAction)about:(id)sender event:(UIEvent*)event;
 - (IBAction)camera:(id)sender event:(UIEvent*)event;
+- (IBAction)flash:(id)sender event:(UIEvent*)event;
+- (IBAction)torch:(id)sender event:(UIEvent*)event;
+- (IBAction)exposure:(id)sender event:(UIEvent*)event;
+- (IBAction)whitebalance:(id)sender event:(UIEvent*)event;
+- (IBAction)direction:(id)sender event:(UIEvent*)event;
 
 @end

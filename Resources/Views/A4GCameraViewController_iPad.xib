@@ -47,7 +47,6 @@
 								<int key="NSvFlags">274</int>
 								<string key="NSFrameSize">{768, 960}</string>
 								<reference key="NSSuperview" ref="70465244"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1039511100"/>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -62,7 +61,6 @@
 								<object class="NSPSMatrix" key="NSFrameMatrix"/>
 								<string key="NSFrame">{{25, 895}, {717, 36}}</string>
 								<reference key="NSSuperview" ref="70465244"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="803726511"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -79,7 +77,6 @@
 										<int key="NSvFlags">274</int>
 										<string key="NSFrameSize">{768, 768}</string>
 										<reference key="NSSuperview" ref="1039511100"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="182742819"/>
 										<object class="NSColor" key="IBUIBackgroundColor">
 											<int key="NSColorSpace">3</int>
@@ -95,7 +92,6 @@
 										<int key="NSvFlags">274</int>
 										<string key="NSFrameSize">{768, 768}</string>
 										<reference key="NSSuperview" ref="1039511100"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="661426388"/>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -103,7 +99,6 @@
 								</array>
 								<string key="NSFrame">{{0, 96}, {768, 768}}</string>
 								<reference key="NSSuperview" ref="70465244"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="728097999"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">3</int>
@@ -115,7 +110,6 @@
 						</array>
 						<string key="NSFrameSize">{768, 960}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="597322574"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -129,7 +123,6 @@
 						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{0, 960}, {768, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -199,7 +192,6 @@
 				</array>
 				<string key="NSFrame">{{0, 20}, {768, 1004}}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="70465244"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -502,229 +494,14 @@
 			<nil key="sourceID"/>
 			<int key="maxID">48</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">A4GAboutViewController</string>
-					<string key="superclassName">A4GTableViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">done:event:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">done:event:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">done:event:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/A4GAboutViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">A4GCameraViewController</string>
-					<string key="superclassName">A4GViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="about:event:">id</string>
-						<string key="camera:event:">id</string>
-						<string key="direction:event:">id</string>
-						<string key="flash:event:">id</string>
-						<string key="focus:event:">id</string>
-						<string key="torch:event:">id</string>
-						<string key="whitebalance:event:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="about:event:">
-							<string key="name">about:event:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="camera:event:">
-							<string key="name">camera:event:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="direction:event:">
-							<string key="name">direction:event:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="flash:event:">
-							<string key="name">flash:event:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="focus:event:">
-							<string key="name">focus:event:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="torch:event:">
-							<string key="name">torch:event:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="whitebalance:event:">
-							<string key="name">whitebalance:event:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="aboutViewController">A4GAboutViewController</string>
-						<string key="cameraButton">UIBarButtonItem</string>
-						<string key="cameraView">UIView</string>
-						<string key="containerView">UIView</string>
-						<string key="directionButton">UIButton</string>
-						<string key="flashButton">UIBarButtonItem</string>
-						<string key="focusButton">UIBarButtonItem</string>
-						<string key="overlayView">UIImageView</string>
-						<string key="pageControl">UIPageControl</string>
-						<string key="previewViewController">A4GPreviewViewController</string>
-						<string key="torchButton">UIBarButtonItem</string>
-						<string key="whitebalanceButton">UIBarButtonItem</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="aboutViewController">
-							<string key="name">aboutViewController</string>
-							<string key="candidateClassName">A4GAboutViewController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="cameraButton">
-							<string key="name">cameraButton</string>
-							<string key="candidateClassName">UIBarButtonItem</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="cameraView">
-							<string key="name">cameraView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="containerView">
-							<string key="name">containerView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="directionButton">
-							<string key="name">directionButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="flashButton">
-							<string key="name">flashButton</string>
-							<string key="candidateClassName">UIBarButtonItem</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="focusButton">
-							<string key="name">focusButton</string>
-							<string key="candidateClassName">UIBarButtonItem</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="overlayView">
-							<string key="name">overlayView</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="pageControl">
-							<string key="name">pageControl</string>
-							<string key="candidateClassName">UIPageControl</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="previewViewController">
-							<string key="name">previewViewController</string>
-							<string key="candidateClassName">A4GPreviewViewController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="torchButton">
-							<string key="name">torchButton</string>
-							<string key="candidateClassName">UIBarButtonItem</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="whitebalanceButton">
-							<string key="name">whitebalanceButton</string>
-							<string key="candidateClassName">UIBarButtonItem</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/A4GCameraViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">A4GPreviewViewController</string>
-					<string key="superclassName">A4GViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="email:event:">id</string>
-						<string key="facebook:event:">id</string>
-						<string key="twitter:event:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="email:event:">
-							<string key="name">email:event:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="facebook:event:">
-							<string key="name">facebook:event:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="twitter:event:">
-							<string key="name">twitter:event:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="containerView">UIView</string>
-						<string key="imageView">UIImageView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="containerView">
-							<string key="name">containerView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="imageView">
-							<string key="name">imageView</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/A4GPreviewViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">A4GTableViewController</string>
-					<string key="superclassName">A4GViewController</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">tableView</string>
-						<string key="NS.object.0">UITableView</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">tableView</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">tableView</string>
-							<string key="candidateClassName">UITableView</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/A4GTableViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">A4GViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="navigationBar">UINavigationBar</string>
-						<string key="toolBar">UIToolbar</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="navigationBar">
-							<string key="name">navigationBar</string>
-							<string key="candidateClassName">UINavigationBar</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="toolBar">
-							<string key="name">toolBar</string>
-							<string key="candidateClassName">UIToolbar</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/A4GViewController.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="background.png">{256, 256}</string>
-			<string key="exposureoff.png">{16, 16}</string>
+			<string key="exposureoff.png">{20, 20}</string>
 			<string key="flashoff.png">{20, 20}</string>
 			<string key="torchoff.png">{20, 20}</string>
 			<string key="whitebalanceoff.png">{20, 20}</string>

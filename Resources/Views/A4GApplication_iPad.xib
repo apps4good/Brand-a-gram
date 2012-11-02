@@ -41,10 +41,12 @@
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
 			<object class="IBUIWindow" id="380026005">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">1316</int>
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{768, 1024}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MAA</bytes>
@@ -171,6 +173,7 @@
 			</object>
 			<object class="IBUIViewController" id="982486258">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="719700573">
+					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Preview</string>
 					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				</object>
@@ -299,12 +302,12 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">camera:event:</string>
+						<string key="label">direction:event:</string>
 						<reference key="source" ref="40103919"/>
 						<reference key="destination" ref="376214068"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">47</int>
+					<int key="connectionID">48</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -448,7 +451,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">47</int>
+			<int key="maxID">48</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -510,6 +513,7 @@
 						<string key="about:event:">id</string>
 						<string key="camera:event:">id</string>
 						<string key="direction:event:">id</string>
+						<string key="exposure:event:">id</string>
 						<string key="flash:event:">id</string>
 						<string key="focus:event:">id</string>
 						<string key="torch:event:">id</string>
@@ -526,6 +530,10 @@
 						</object>
 						<object class="IBActionInfo" key="direction:event:">
 							<string key="name">direction:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="exposure:event:">
+							<string key="name">exposure:event:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="flash:event:">
@@ -551,6 +559,7 @@
 						<string key="cameraView">UIView</string>
 						<string key="containerView">UIView</string>
 						<string key="directionButton">UIButton</string>
+						<string key="exposureButton">UIBarButtonItem</string>
 						<string key="flashButton">UIBarButtonItem</string>
 						<string key="focusButton">UIBarButtonItem</string>
 						<string key="overlayView">UIImageView</string>
@@ -579,6 +588,10 @@
 						<object class="IBToOneOutletInfo" key="directionButton">
 							<string key="name">directionButton</string>
 							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="exposureButton">
+							<string key="name">exposureButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="flashButton">
 							<string key="name">flashButton</string>

@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">10K549</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1038.36</string>
-		<string key="IBDocument.HIToolboxVersion">461.00</string>
+		<int key="IBDocument.SystemTarget">1536</int>
+		<string key="IBDocument.SystemVersion">12C2034</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">933</string>
+			<string key="NS.object.0">1930</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
-			<string>IBUINavigationController</string>
-			<string>IBUIViewController</string>
-			<string>IBUICustomObject</string>
 			<string>IBUIBarButtonItem</string>
-			<string>IBUIWindow</string>
-			<string>IBUINavigationBar</string>
-			<string>IBUINavigationItem</string>
 			<string>IBUIButton</string>
+			<string>IBUICustomObject</string>
+			<string>IBUINavigationBar</string>
+			<string>IBUINavigationController</string>
+			<string>IBUINavigationItem</string>
+			<string>IBUIViewController</string>
+			<string>IBUIWindow</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -41,13 +41,10 @@
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
 			<object class="IBUIWindow" id="380026005">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">1316</int>
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{768, 1024}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MAA</bytes>
@@ -136,7 +133,6 @@
 									<string key="NSFrame">{{726, 5}, {35, 33}}</string>
 									<reference key="NSSuperview"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
 									<bool key="IBUIOpaque">NO</bool>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<int key="IBUIContentHorizontalAlignment">0</int>
@@ -175,7 +171,6 @@
 			</object>
 			<object class="IBUIViewController" id="982486258">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="719700573">
-					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Preview</string>
 					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				</object>
@@ -515,8 +510,8 @@
 						<string key="about:event:">id</string>
 						<string key="camera:event:">id</string>
 						<string key="direction:event:">id</string>
-						<string key="exposure:event:">id</string>
 						<string key="flash:event:">id</string>
+						<string key="focus:event:">id</string>
 						<string key="torch:event:">id</string>
 						<string key="whitebalance:event:">id</string>
 					</dictionary>
@@ -533,12 +528,12 @@
 							<string key="name">direction:event:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="exposure:event:">
-							<string key="name">exposure:event:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="flash:event:">
 							<string key="name">flash:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="focus:event:">
+							<string key="name">focus:event:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="torch:event:">
@@ -556,8 +551,8 @@
 						<string key="cameraView">UIView</string>
 						<string key="containerView">UIView</string>
 						<string key="directionButton">UIButton</string>
-						<string key="exposureButton">UIBarButtonItem</string>
 						<string key="flashButton">UIBarButtonItem</string>
+						<string key="focusButton">UIBarButtonItem</string>
 						<string key="overlayView">UIImageView</string>
 						<string key="pageControl">UIPageControl</string>
 						<string key="previewViewController">A4GPreviewViewController</string>
@@ -585,12 +580,12 @@
 							<string key="name">directionButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="exposureButton">
-							<string key="name">exposureButton</string>
-							<string key="candidateClassName">UIBarButtonItem</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="flashButton">
 							<string key="name">flashButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="focusButton">
+							<string key="name">focusButton</string>
 							<string key="candidateClassName">UIBarButtonItem</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="overlayView">
@@ -711,6 +706,6 @@
 			<string key="NS.key.0">back.png</string>
 			<string key="NS.object.0">{16, 19}</string>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">933</string>
+		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
 </archive>

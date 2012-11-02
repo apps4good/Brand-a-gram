@@ -52,7 +52,6 @@
 - (void)swipeLeft:(UISwipeGestureRecognizer *)recognizer;
 - (void)swipeRight:(UISwipeGestureRecognizer *)recognizer;
 
-- (void) captureImage;
 - (void) captureImageInBackground;
 
 - (void) processImage:(UIImage*)image;
@@ -68,6 +67,7 @@
 - (AVCaptureDevice*) captureDeviceWithPosition:(AVCaptureDevicePosition)position;
 - (AVCaptureDevice*) initializeCaptureDevice;
 - (BOOL) hasWhiteBalance;
+- (BOOL) hasFocus;
 - (BOOL) hasExposure;
 
 @end
@@ -93,6 +93,7 @@
 @synthesize cameraButton = _cameraButton;
 @synthesize flashButton = _flashButton;
 @synthesize torchButton = _torchButton;
+@synthesize focusButton = _focusButton;
 @synthesize exposureButton = _exposureButton;
 @synthesize whitebalanceButton = _whitebalanceButton;
 @synthesize directionButton = _directionButton;
@@ -107,47 +108,68 @@
 
 - (IBAction)camera:(id)sender event:(UIEvent*)event {
     DLog(@"");
-    [self captureImage];
+    [self showLoadingWithMessage:NSLocalizedString(@"Capturing...", nil)];
+    [self performSelector:@selector(captureImageInBackground) withObject:nil afterDelay:0.2];
 }
 
 - (IBAction)direction:(id)sender event:(UIEvent*)event {
-    DLog(@"Switching AVCaptureDevicePosition...");
-    for (AVCaptureDeviceInput *input in self.captureSession.inputs) {
-        AVCaptureDevice *device = input.device;
-        if ([device hasMediaType:AVMediaTypeVideo] ) {
-            AVCaptureDevicePosition position = device.position;
-            AVCaptureDevice *captureDevice = nil;
-            if (position == AVCaptureDevicePositionFront) {
-                captureDevice = [self captureDeviceWithPosition:AVCaptureDevicePositionBack];
-                [self.directionButton setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
+    DLog(@"");
+    @try {
+        for (AVCaptureDeviceInput *input in self.captureSession.inputs) {
+            AVCaptureDevice *device = input.device;
+            if ([device hasMediaType:AVMediaTypeVideo] ) {
+                AVCaptureDevicePosition position = device.position;
+                AVCaptureDevice *captureDevice = nil;
+                if (position == AVCaptureDevicePositionFront) {
+                    captureDevice = [self captureDeviceWithPosition:AVCaptureDevicePositionBack];
+                    [self.directionButton setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
+                }
+                else {
+                    captureDevice = [self captureDeviceWithPosition:AVCaptureDevicePositionFront];
+                    [self.directionButton setImage:[UIImage imageNamed:@"forward.png"] forState:UIControlStateNormal];
+                }
+                 AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:nil];
+                [self.captureSession beginConfiguration];
+                [self.captureSession removeInput:self.deviceInput];
+                [self.captureSession addInput:deviceInput];
+                [self.captureSession commitConfiguration];
+                self.deviceInput = deviceInput;
+                break;
             }
-            else {
-                captureDevice = [self captureDeviceWithPosition:AVCaptureDevicePositionFront];
-                [self.directionButton setImage:[UIImage imageNamed:@"forward.png"] forState:UIControlStateNormal];
-            }
-             AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:nil];
-            [self.captureSession beginConfiguration];
-            [self.captureSession removeInput:self.deviceInput];
-            [self.captureSession addInput:deviceInput];
-            [self.captureSession commitConfiguration];
-            self.deviceInput = deviceInput;
-            break;
         }
-    } 
+    }
+    @catch (NSException *exception) {
+        [UIAlertView showWithTitle:NSLocalizedString(@"Flash Error", nil)
+                           message:exception.description
+                          delegate:self
+                               tag:0
+                 cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                 otherButtonTitles:nil];
+    }
 }
 
 - (IBAction)flash:(id)sender event:(UIEvent*)event {
     DLog(@"");
     [self.captureDevice lockForConfiguration:nil];
-    if ([self.captureDevice hasFlash]){
-        if (self.captureDevice.flashMode == AVCaptureFlashModeOn) {
-            self.captureDevice.flashMode = AVCaptureFlashModeOff;
-            self.flashButton.image = [UIImage imageNamed:@"flashoff.png"];
+    @try {
+        if ([self.captureDevice hasFlash]){
+            if (self.captureDevice.flashMode == AVCaptureFlashModeOn) {
+                self.captureDevice.flashMode = AVCaptureFlashModeOff;
+                self.flashButton.image = [UIImage imageNamed:@"flashoff.png"];
+            }
+            else {
+                self.captureDevice.flashMode = AVCaptureFlashModeOn;
+                self.flashButton.image = [UIImage imageNamed:@"flashon.png"];
+            }
         }
-        else {
-            self.captureDevice.flashMode = AVCaptureFlashModeOn;
-            self.flashButton.image = [UIImage imageNamed:@"flashon.png"];
-        }
+    }
+    @catch (NSException *exception) {
+        [UIAlertView showWithTitle:NSLocalizedString(@"Flash Error", nil)
+                           message:exception.description
+                          delegate:self
+                               tag:0
+                 cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                 otherButtonTitles:nil];
     }
     [self.captureDevice unlockForConfiguration];
 }
@@ -155,26 +177,98 @@
 - (IBAction)torch:(id)sender event:(UIEvent*)event {
     DLog(@"");
     [self.captureDevice lockForConfiguration:nil];
-    if ([self.captureDevice hasTorch]){
-        if (self.captureDevice.torchMode == AVCaptureTorchModeOn) {
-            self.captureDevice.torchMode = AVCaptureTorchModeOff;
-            self.torchButton.image = [UIImage imageNamed:@"torchoff.png"];
+    @try {
+        if ([self.captureDevice hasTorch]){
+            if (self.captureDevice.torchMode == AVCaptureTorchModeOn) {
+                self.captureDevice.torchMode = AVCaptureTorchModeOff;
+                self.torchButton.image = [UIImage imageNamed:@"torchoff.png"];
+            }
+            else {
+                self.captureDevice.torchMode = AVCaptureTorchModeOn;
+                self.torchButton.image = [UIImage imageNamed:@"torchon.png"];
+            }
         }
-        else {
-            self.captureDevice.torchMode = AVCaptureTorchModeOn;
-            self.torchButton.image = [UIImage imageNamed:@"torchon.png"];
-        }
+    }
+    @catch (NSException *exception) {
+        [UIAlertView showWithTitle:NSLocalizedString(@"Torch Error", nil)
+                           message:exception.description
+                          delegate:self
+                               tag:0
+                 cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                 otherButtonTitles:nil];
     }
     [self.captureDevice unlockForConfiguration];
 }
 
-- (IBAction)exposure:(id)sender event:(UIEvent*)event {
+- (IBAction)focus:(id)sender event:(UIEvent*)event {
     DLog(@"");
     [self.captureDevice lockForConfiguration:nil];
     @try {
-        if ([self hasExposure]){
+        if ([self hasFocus]){
+            if (self.captureDevice.focusMode == AVCaptureFocusModeAutoFocus ||
+                self.captureDevice.focusMode == AVCaptureFocusModeContinuousAutoFocus ) {
+                self.captureDevice.focusMode = AVCaptureFocusModeLocked;
+                self.focusButton.image = [UIImage imageNamed:@"focusoff.png"];
+            }
+            else if ([self.captureDevice isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
+                self.captureDevice.focusMode = AVCaptureFocusModeContinuousAutoFocus;
+                self.focusButton.image = [UIImage imageNamed:@"focuson.png"];
+            }
+            else if ([self.captureDevice isFocusModeSupported:AVCaptureFocusModeAutoFocus]) {
+                self.captureDevice.focusMode = AVCaptureFocusModeAutoFocus;
+                self.focusButton.image = [UIImage imageNamed:@"focuson.png"];        
+            }
+        }
+    }
+    @catch (NSException *exception) {
+        [UIAlertView showWithTitle:NSLocalizedString(@"Focus Error", nil) 
+                           message:exception.description 
+                          delegate:self 
+                               tag:0 
+                 cancelButtonTitle:NSLocalizedString(@"OK", nil) 
+                 otherButtonTitles:nil];
+    }
+    [self.captureDevice unlockForConfiguration];
+}
+
+- (IBAction)whitebalance:(id)sender event:(UIEvent *)event {
+    DLog(@"");
+    [self.captureDevice lockForConfiguration:nil];
+    @try {
+        if ([self hasWhiteBalance]){
+            if (self.captureDevice.whiteBalanceMode == AVCaptureWhiteBalanceModeAutoWhiteBalance ||
+                self.captureDevice.whiteBalanceMode == AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance ) {
+                self.captureDevice.whiteBalanceMode = AVCaptureFocusModeLocked;
+                self.whitebalanceButton.image = [UIImage imageNamed:@"whitebalanceoff.png"];
+            }
+            else if ([self.captureDevice isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance]) {
+                self.captureDevice.whiteBalanceMode = AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance;
+                self.whitebalanceButton.image = [UIImage imageNamed:@"whitebalanceon.png"];
+            }
+            else if ([self.captureDevice isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeAutoWhiteBalance]) {
+                self.captureDevice.whiteBalanceMode = AVCaptureWhiteBalanceModeAutoWhiteBalance;
+                self.whitebalanceButton.image = [UIImage imageNamed:@"whitebalanceon.png"];
+            }
+        }
+    }
+    @catch (NSException *exception) {
+        [UIAlertView showWithTitle:NSLocalizedString(@"White Balance Error", nil)
+                           message:exception.description
+                          delegate:self
+                               tag:0
+                 cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                 otherButtonTitles:nil];
+    }
+    [self.captureDevice unlockForConfiguration];
+}
+
+- (IBAction)exposure:(id)sender event:(UIEvent *)event  {    
+    DLog(@"");
+    [self.captureDevice lockForConfiguration:nil];
+    @try {
+        if ([self hasExposure]) {
             if (self.captureDevice.exposureMode == AVCaptureExposureModeAutoExpose ||
-                self.captureDevice.exposureMode == AVCaptureExposureModeContinuousAutoExposure ) {
+                self.captureDevice.exposureMode == AVCaptureExposureModeContinuousAutoExposure) {
                 self.captureDevice.exposureMode = AVCaptureExposureModeLocked;
                 self.exposureButton.image = [UIImage imageNamed:@"exposureoff.png"];
             }
@@ -182,11 +276,11 @@
                 self.captureDevice.exposureMode = AVCaptureExposureModeContinuousAutoExposure;
                 self.exposureButton.image = [UIImage imageNamed:@"exposureon.png"];
             }
-            else if ([self.captureDevice isWhiteBalanceModeSupported:AVCaptureExposureModeAutoExpose]) {
+            else if ([self.captureDevice isExposureModeSupported:AVCaptureExposureModeAutoExpose]) {
                 self.captureDevice.exposureMode = AVCaptureExposureModeAutoExpose;
-                self.exposureButton.image = [UIImage imageNamed:@"exposureon.png"];        
+                self.exposureButton.image = [UIImage imageNamed:@"exposureon.png"];
             }
-        }
+        }        
     }
     @catch (NSException *exception) {
         [UIAlertView showWithTitle:NSLocalizedString(@"Exposure Error", nil) 
@@ -199,43 +293,7 @@
     [self.captureDevice unlockForConfiguration];
 }
 
-- (IBAction)whitebalance:(id)sender event:(UIEvent *)event {    
-    DLog(@"");
-    [self.captureDevice lockForConfiguration:nil];
-    @try {
-        if ([self hasWhiteBalance]) {
-            if (self.captureDevice.whiteBalanceMode == AVCaptureWhiteBalanceModeAutoWhiteBalance ||
-                self.captureDevice.whiteBalanceMode == AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance) {
-                self.captureDevice.whiteBalanceMode = AVCaptureWhiteBalanceModeLocked;
-                self.whitebalanceButton.image = [UIImage imageNamed:@"whitebalanceoff.png"];
-            }
-            else if ([self.captureDevice isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance]) {
-                self.captureDevice.whiteBalanceMode = AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance;
-                self.whitebalanceButton.image = [UIImage imageNamed:@"whitebalanceon.png"];
-            }
-            else if ([self.captureDevice isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeAutoWhiteBalance]) {
-                self.captureDevice.whiteBalanceMode = AVCaptureWhiteBalanceModeAutoWhiteBalance;
-                self.whitebalanceButton.image = [UIImage imageNamed:@"whitebalanceon.png"];        
-            }
-        }        
-    }
-    @catch (NSException *exception) {
-        [UIAlertView showWithTitle:NSLocalizedString(@"Whitebalance Error", nil) 
-                           message:exception.description 
-                          delegate:self 
-                               tag:0 
-                 cancelButtonTitle:NSLocalizedString(@"OK", nil) 
-                 otherButtonTitles:nil];
-    }
-    [self.captureDevice unlockForConfiguration];
-}
-
 #pragma mark - AVFoundation
-
-- (void) captureImage {
-    [self showLoadingWithMessage:NSLocalizedString(@"Capturing...", nil)];
-    [self performSelector:@selector(captureImageInBackground) withObject:nil afterDelay:0.2];
-}
 
 - (AVCaptureDevice*) initializeCaptureDevice {
     DLog(@"Creating AVCaptureSession...");
@@ -344,14 +402,28 @@
         self.whitebalanceButton.enabled = NO;
     }
     
+    if ([self hasFocus]) {
+        if (self.captureDevice.focusMode == AVCaptureFocusModeAutoFocus||
+            self.captureDevice.focusMode == AVCaptureFocusModeContinuousAutoFocus) {
+            self.focusButton.image = [UIImage imageNamed:@"focuson.png"];
+        }
+        else {
+            self.focusButton.image = [UIImage imageNamed:@"focusoff.png"];
+        }   
+        self.focusButton.enabled = YES;
+    }
+    else {
+        self.focusButton.enabled = NO;
+    }
+    
     if ([self hasExposure]) {
-        if (self.captureDevice.exposureMode == AVCaptureExposureModeAutoExpose|| 
+        if (self.captureDevice.exposureMode == AVCaptureExposureModeAutoExpose||
             self.captureDevice.exposureMode == AVCaptureExposureModeContinuousAutoExposure) {
             self.exposureButton.image = [UIImage imageNamed:@"exposureon.png"];
         }
         else {
             self.exposureButton.image = [UIImage imageNamed:@"exposureoff.png"];
-        }   
+        }
         self.exposureButton.enabled = YES;
     }
     else {
@@ -368,6 +440,12 @@
     return  [self.captureDevice isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeLocked] ||
             [self.captureDevice isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeAutoWhiteBalance] || 
             [self.captureDevice isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance];
+}
+
+- (BOOL) hasFocus {
+    return  [self.captureDevice isFocusModeSupported:AVCaptureFocusModeLocked] ||
+            [self.captureDevice isFocusModeSupported:AVCaptureFocusModeAutoFocus] ||
+            [self.captureDevice isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus];
 }
 
 - (BOOL) hasExposure {
@@ -493,6 +571,7 @@
     [_cameraButton release];
     [_flashButton release];
     [_torchButton release];
+    [_exposureButton release];
     [_directionButton release];
     [super dealloc];
 }

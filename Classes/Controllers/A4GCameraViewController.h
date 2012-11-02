@@ -49,6 +49,7 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *flashButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *torchButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *whitebalanceButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *focusButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *exposureButton;
 @property (strong, nonatomic) IBOutlet UIButton *directionButton;
 
@@ -56,6 +57,7 @@
 - (IBAction)camera:(id)sender event:(UIEvent*)event;
 - (IBAction)flash:(id)sender event:(UIEvent*)event;
 - (IBAction)torch:(id)sender event:(UIEvent*)event;
+- (IBAction)focus:(id)sender event:(UIEvent*)event;
 - (IBAction)exposure:(id)sender event:(UIEvent*)event;
 - (IBAction)whitebalance:(id)sender event:(UIEvent*)event;
 - (IBAction)direction:(id)sender event:(UIEvent*)event;

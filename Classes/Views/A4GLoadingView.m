@@ -68,6 +68,11 @@
 	[self showWithMessage:NSLocalizedString(@"Loading...", nil) afterDelay:delay animated:YES];
 }
 
+- (void) showWithMessage:(NSString *)message hide:(NSTimeInterval)delay {
+    [self showWithMessage:message];
+    [self hideAfterDelay:delay];
+}
+
 - (void) showWithMessage:(NSString *)message {
 	[self showWithMessage:message afterDelay:0.0 animated:YES];
 }

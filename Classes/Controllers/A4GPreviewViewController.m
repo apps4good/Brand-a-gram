@@ -46,25 +46,22 @@
 
 - (IBAction)twitter:(id)sender event:(UIEvent*)event {
     DLog(@"");
-    [self.shareController sendTweet:[A4GSettings appName] withImage:self.image];
+    [self.shareController sendTweet:[A4GSettings appName] url:nil image:self.image];
 }
 
 - (IBAction)facebook:(id)sender event:(UIEvent*)event {
     DLog(@"");
-    [self.shareController shareFacebook:[A4GSettings appName] 
-                                caption:[A4GSettings appText] 
-                            description:nil 
-                                   link:nil];
+    [self.shareController shareFacebook:[A4GSettings appName] url:nil image:self.image];
 }
 
 - (IBAction)email:(id)sender event:(UIEvent*)event {
     DLog(@"");
     NSData *data = UIImageJPEGRepresentation(self.image, 0);
     [self.shareController sendEmail:nil 
-                        withSubject:[A4GSettings appName] 
-                      addAttachment:data 
+                            subject:[A4GSettings appName]
+                         attachment:data
                            fileName:[NSString stringWithFormat:@"%@.jpg", [A4GSettings appName]]
-                        toRecipient:nil];
+                          recipient:nil];
 }
 
 #pragma mark - UIViewController
@@ -104,10 +101,6 @@
     self.imageView.frame = frame;
     self.imageView.image = self.image;
     DLog(@"Preview:%@", NSStringFromCGSize(self.imageView.frame.size));
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return interfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
 @end

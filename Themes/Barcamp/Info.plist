@@ -14,8 +14,6 @@
 	<string>http://apps4good.ca/apps/brandagram</string>
 	<key>A4GButtonDoneColor</key>
 	<string>#679f41</string>
-	<key>A4GFacebookAppID</key>
-	<string>278468152260797</string>
 	<key>A4GNavBarColor</key>
 	<string>#000000</string>
 	<key>A4GOverlays</key>
@@ -81,8 +79,17 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>fb348407745255280</string>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>FacebookAppID</key>
+	<string>348407745255280</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>

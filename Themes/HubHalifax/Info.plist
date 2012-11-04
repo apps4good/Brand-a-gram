@@ -2,6 +2,47 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>A4GAboutEmail</key>
+	<string>contact@apps4good.ca</string>
+	<key>A4GAboutText</key>
+	<string>Apps4Good is an alliance of software developers who are passionate about improving their community, by doing what they love: building software.</string>
+	<key>A4GAboutURL</key>
+	<string>http://apps4good.ca</string>
+	<key>A4GAppText</key>
+	<string>Brandagram is a unique photo sharing app for iPhone designed to promote fun, engagement, and community at your event or organization!</string>
+	<key>A4GAppURL</key>
+	<string>http://apps4good.ca/apps/brandagram</string>
+	<key>A4GButtonDoneColor</key>
+	<string>#848484</string>
+	<key>A4GNavBarColor</key>
+	<string>#832a27</string>
+	<key>A4GOverlays</key>
+	<array>
+		<string>overlay-1.png</string>
+		<string>overlay-2.png</string>
+		<string>overlay-3.png</string>
+		<string>overlay-4.png</string>
+	</array>
+	<key>A4GTableGroupedBackColor</key>
+	<string>#F2F2F2</string>
+	<key>A4GTableGroupedHeaderTextColor</key>
+	<string>#6E6E6E</string>
+	<key>A4GTableGroupedTextColor</key>
+	<string>#848484</string>
+	<key>A4GTablePlainBackColor</key>
+	<string>#FAFAFA</string>
+	<key>A4GTablePlainHeaderBackColor</key>
+	<string>#6E6E6E</string>
+	<key>A4GTablePlainHeaderTextColor</key>
+	<string>#424242</string>
+	<key>A4GTablePlainRowEvenColor</key>
+	<string>#F3F3F3</string>
+	<key>A4GTablePlainRowOddColor</key>
+	<string>#F1F1F1</string>
+	<key>A4GTablePlainTextColor</key>
+	<string>#848484</string>
+	<key>A4GToolBarColor</key>
+	<string>#832a27</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -34,8 +75,17 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>fb348407745255280</string>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>FacebookAppID</key>
+	<string>348407745255280</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
@@ -51,56 +101,11 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>A4GOverlays</key>
-	<array>
-		<string>overlay-1.png</string>
-		<string>overlay-2.png</string>
-		<string>overlay-3.png</string>
-		<string>overlay-4.png</string>
-	</array>
-	<key>A4GAboutEmail</key>
-	<string>contact@apps4good.ca</string>
-	<key>A4GAppText</key>
-	<string>Brandagram is a unique photo sharing app for iPhone designed to promote fun, engagement, and community at your event or organization!</string>
-	<key>A4GAboutText</key>
-	<string>Apps4Good is an alliance of software developers who are passionate about improving their community, by doing what they love: building software.</string>
-	<key>A4GAboutURL</key>
-	<string>http://apps4good.ca</string>
-	<key>A4GAppURL</key>
-	<string>http://apps4good.ca/apps/brandagram</string>
-	<key>A4GButtonDoneColor</key>
-	<string>#848484</string>
-	<key>A4GNavBarColor</key>
-	<string>#832a27</string>
-	<key>A4GToolBarColor</key>
-	<string>#832a27</string>
-	<key>A4GTableGroupedBackColor</key>
-	<string>#F2F2F2</string>
-	<key>A4GTableGroupedHeaderTextColor</key>
-	<string>#6E6E6E</string>
-	<key>A4GTableGroupedTextColor</key>
-	<string>#848484</string>
-	<key>A4GTablePlainBackColor</key>
-	<string>#FAFAFA</string>
-	<key>A4GTablePlainHeaderBackColor</key>
-	<string>#6E6E6E</string>
-	<key>A4GTablePlainHeaderTextColor</key>
-	<string>#424242</string>
-	<key>A4GTablePlainRowEvenColor</key>
-	<string>#F3F3F3</string>
-	<key>A4GTablePlainRowOddColor</key>
-	<string>#F1F1F1</string>
-	<key>A4GTablePlainTextColor</key>
-	<string>#848484</string>
-	<key>A4GFacebookAppID</key>
-	<string>278468152260797</string>
 	<key>UNFacebookAppSecret</key>
 	<string>91114ba6da2dcdb3e71c35b9b0258d73</string>
 </dict>

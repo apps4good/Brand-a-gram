@@ -31,7 +31,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import <Twitter/Twitter.h>
 #import <Accounts/Accounts.h>
-#import "FBConnect.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @protocol A4GShareControllerDelegate;
 
@@ -41,8 +41,7 @@
                                          UIDocumentInteractionControllerDelegate,
                                          MFMailComposeViewControllerDelegate,
                                          MFMessageComposeViewControllerDelegate,
-                                         FBDialogDelegate, 
-                                         FBSessionDelegate>
+                                         FBLoginViewDelegate>
 
 - (id) initWithController:(UIViewController<A4GShareControllerDelegate>*)controller;
 
@@ -59,8 +58,8 @@
 - (void) callNumber:(NSString *)number;
 
 - (BOOL) canPrintText;
-- (void) printData:(NSData*)data withTitle:(NSString*)title;
-- (void) printText:(NSString*)text withTitle:(NSString*)title;
+- (void) printData:(NSData*)data title:(NSString*)title;
+- (void) printText:(NSString*)text title:(NSString*)title;
 
 - (BOOL) canCopyText;
 - (void) copyText:(NSString *)string;
@@ -69,12 +68,12 @@
 - (void) sendSMS:(NSString *)message;
 
 - (BOOL) canSendEmail;
-- (void) sendEmail:(NSString*)message withSubject:(NSString *)subject addAttachment:(NSData*)attachment fileName:(NSString*)fileName toRecipient:(NSString*)recipient;
-- (void) sendEmail:(NSString*)message withSubject:(NSString *)subject addAttachment:(NSData*)attachment fileName:(NSString*)fileName toRecipients:(NSArray*)recipients;
+- (void) sendEmail:(NSString*)message subject:(NSString *)subject attachment:(NSData*)attachment fileName:(NSString*)fileName recipient:(NSString*)recipient;
+- (void) sendEmail:(NSString*)message subject:(NSString *)subject attachment:(NSData*)attachment fileName:(NSString*)fileName recipients:(NSArray*)recipients;
 
 - (BOOL) canSendTweet;
-- (void) sendTweet:(NSString*)tweet withURL:(NSString*)url;
-- (void) sendTweet:(NSString*)tweet withImage:(UIImage*)image;
+- (void) sendTweet:(NSString*)tweet url:(NSString*)url;
+- (void) sendTweet:(NSString*)tweet url:(NSString*)url image:(UIImage*)image;
 
 - (BOOL) canOpenURL:(NSString*)url;
 - (void) openURL:(NSString *)url;
@@ -83,7 +82,8 @@
 - (BOOL) canOpenInWithUrl:(NSURL *)url;
 - (void) showOpenInWithUrl:(NSString*)url;
 
-- (void) shareFacebook:(NSString *)name caption:(NSString*)caption description:(NSString *)description link:(NSString*)link;
+- (void) shareFacebook:(NSString*)text url:(NSString*)url;
+- (void) shareFacebook:(NSString*)text url:(NSString*)url image:(UIImage*)image;
 
 @end
 

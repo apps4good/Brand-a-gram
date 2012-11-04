@@ -133,11 +133,15 @@ typedef enum {
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return interfaceOrientation == UIInterfaceOrientationPortrait;
+    return NO;
 }
 
 - (BOOL)shouldAutorotate {
     return NO;
+}
+
+-(NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 #pragma mark - UIAlertViewDelegate

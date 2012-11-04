@@ -46,7 +46,6 @@
 @property (strong, nonatomic) NSString *textShareFacebook;
 @property (strong, nonatomic) NSString *textOpenIn;
 @property (strong, nonatomic) A4GLoadingView *loadingView;
-@property (strong, nonatomic) Facebook *facebook;
 @property (assign, nonatomic) CGRect touch;
 
 @end
@@ -63,7 +62,6 @@
 @synthesize textShareFacebook = _textShareFacebook;
 @synthesize textOpenIn = _textOpenIn;
 @synthesize loadingView = _loadingView;
-@synthesize facebook = _facebook;
 @synthesize touch = _touch;
 
 typedef enum {
@@ -85,9 +83,6 @@ typedef enum {
         self.textCopyClipboard = NSLocalizedString(@"Copy to Clipboard", nil);
         self.textOpenIn = NSLocalizedString(@"Open In...", nil);
         self.textCancelAction = NSLocalizedString(@"Cancel", nil);
-        self.facebook = [[Facebook alloc] initWithAppId:[A4GSettings facebookAppID] andDelegate:self];
-        self.facebook.accessToken = [A4GSettings facebookTokenKey];
-        self.facebook.expirationDate = [A4GSettings facebookDateKey];
     }
     return self;
 }
@@ -101,7 +96,6 @@ typedef enum {
     [_textCancelAction release];
     [_textCopyClipboard release];
     [_textShareFacebook release];
-    [_facebook release];
     [super dealloc];
 }
 
@@ -114,31 +108,31 @@ typedef enum {
                                                      cancelButtonTitle:nil
                                                 destructiveButtonTitle:nil
                                                      otherButtonTitles:nil] autorelease];
-    if (open) {
+    if (open && [self.controller respondsToSelector:@selector(shareOpenURL:)]) {
         DLog(@"canOpenURL");
         [actionSheet addButtonWithTitle:self.textOpenIn];
     }
-    if (print && [self canPrintText]) {
+    if (print && [self canPrintText] && [self.controller respondsToSelector:@selector(shareOpenURL:)]) {
         DLog(@"canPrintText");
         [actionSheet addButtonWithTitle:self.textPrintDetails];
     }
-    if (copy && [self canCopyText]) {
+    if (copy && [self canCopyText] && [self.controller respondsToSelector:@selector(shareCopyText:)]) {
         DLog(@"canCopyText");
         [actionSheet addButtonWithTitle:self.textCopyClipboard];
     }
-    if (email && [self canSendEmail]) {
+    if (email && [self canSendEmail] && [self.controller respondsToSelector:@selector(shareSendEmail:)]) {
         DLog(@"canSendMail");
         [actionSheet addButtonWithTitle:self.textShareEmail];
     }
-    if (sms && [self canSendSMS]) {
+    if (sms && [self canSendSMS] && [self.controller respondsToSelector:@selector(shareSendSMS:)]) {
         DLog(@"canSendSMS");
         [actionSheet addButtonWithTitle:self.textShareSMS];
     }
-    if (twitter && [self canSendTweet]) {
+    if (twitter && [self canSendTweet] && [self.controller respondsToSelector:@selector(shareSendTweet:)]) {
         DLog(@"canSendTweet");
         [actionSheet addButtonWithTitle:self.textShareTwitter];
     }
-    if (facebook) {
+    if (facebook && [self.controller respondsToSelector:@selector(sharePostFacebook:)]) {
         DLog(@"canShareFacebook");
         [actionSheet addButtonWithTitle:self.textShareFacebook];
     }
@@ -237,8 +231,12 @@ typedef enum {
     return YES;
 }
 
-- (void) sendTweet:(NSString*)tweet withURL:(NSString*)url {
-    DLog(@"Tweet:%@ URL:%@", tweet, url);
+- (void) sendTweet:(NSString*)tweet url:(NSString*)url {
+    [self sendTweet:tweet url:url image:nil];
+}
+
+- (void) sendTweet:(NSString*)tweet url:(NSString*)url image:(UIImage*)image {
+    DLog(@"Tweet:%@ Image", tweet);
     if ([TWTweetComposeViewController class] != nil && [TWTweetComposeViewController canSendTweet]) {
         TWTweetComposeViewController *twitterController = [[TWTweetComposeViewController alloc] init];
         if (tweet != nil) {
@@ -246,27 +244,6 @@ typedef enum {
         }
         if (url != nil) {
             [twitterController addURL:[NSURL URLWithString:url]];
-        }
-        [self.controller presentModalViewController:twitterController animated:YES];
-        [twitterController release];
-    }
-    else {
-        NSString *nibName = [A4GDevice isIPad] ? @"A4GTwitterViewController_iPad" : @"A4GTwitterViewController_iPhone";
-        A4GTwitterViewController *twitterController = [[A4GTwitterViewController alloc] initWithNibName:nibName bundle:nil];
-        twitterController.url = url;
-        twitterController.name = tweet;
-        twitterController.modalPresentationStyle = UIModalPresentationFormSheet;
-        twitterController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [self.controller presentModalViewController:twitterController animated:YES];  
-    }
-}
-
-- (void) sendTweet:(NSString*)tweet withImage:(UIImage*)image {
-    DLog(@"Tweet:%@ Image", tweet);
-    if ([TWTweetComposeViewController class] != nil && [TWTweetComposeViewController canSendTweet]) {
-        TWTweetComposeViewController *twitterController = [[TWTweetComposeViewController alloc] init];
-        if (tweet != nil) {
-            [twitterController setInitialText:tweet];
         }
         if (image != nil) {
             [twitterController addImage:image];
@@ -291,12 +268,12 @@ typedef enum {
     return [MFMailComposeViewController canSendMail];
 }
 
-- (void) sendEmail:(NSString*)message withSubject:(NSString *)subject addAttachment:(NSData*)attachment fileName:(NSString*)fileName toRecipient:(NSString*)recipient {
+- (void) sendEmail:(NSString*)message subject:(NSString *)subject attachment:(NSData*)attachment fileName:(NSString*)fileName recipient:(NSString*)recipient {
     NSArray *recipients = recipient != nil ? [NSArray arrayWithObject:recipient] : nil;
-    [self sendEmail:message withSubject:subject addAttachment:attachment fileName:fileName toRecipients:recipients];   
+    [self sendEmail:message subject:subject attachment:attachment fileName:fileName recipients:recipients];
 }
 
-- (void) sendEmail:(NSString*)message withSubject:(NSString *)subject addAttachment:(NSData*)attachment fileName:(NSString*)fileName toRecipients:(NSArray*)recipients {
+- (void) sendEmail:(NSString*)message subject:(NSString *)subject attachment:(NSData*)attachment fileName:(NSString*)fileName recipients:(NSArray*)recipients {
     DLog(@"Message:%@ Subject:%@", message, subject);
     if ([self canSendEmail]) {
         MFMailComposeViewController *mailController = [[[MFMailComposeViewController alloc] init] autorelease];
@@ -353,7 +330,7 @@ typedef enum {
     return [UIPrintInteractionController isPrintingAvailable];
 }
 
-- (void) printData:(NSData*)data withTitle:(NSString*)title {
+- (void) printData:(NSData*)data title:(NSString*)title {
     if ([self canPrintText]) {
         UIPrintInteractionController *printController = [UIPrintInteractionController sharedPrintController];
         if (printController && [UIPrintInteractionController canPrintData:data]) {
@@ -391,11 +368,11 @@ typedef enum {
     }    
 }
 
-- (void) printText:(NSString*)text withTitle:(NSString*)title {
+- (void) printText:(NSString*)text title:(NSString*)title {
     DLog(@"Text:%@ Title:%@", text, title);
     if (text != nil) {
         NSData *data = [text dataUsingEncoding:NSUTF8StringEncoding];
-        [self printData:data withTitle:title];   
+        [self printData:data title:title];
     }
 }
 
@@ -493,63 +470,6 @@ typedef enum {
     }
 }
 
-#pragma mark - FBDialogDelegate
-
-- (void) shareFacebook:(NSString *)name caption:(NSString*)caption description:(NSString *)description link:(NSString*)link {
-    if ([self.facebook isSessionValid]) {
-        NSMutableDictionary *params = [NSMutableDictionary dictionary];
-        if (name != nil) {
-            [params setObject:name forKey:@"name"];
-        }
-        if (caption != nil) {
-            [params setObject:caption forKey:@"caption"];
-        }
-        if (description != nil) {
-            [params setObject:description forKey:@"description"];
-        }
-        if (link != nil) {
-            [params setObject:name forKey:@"link"];
-        }
-        [self.facebook dialog:@"feed" andParams:params andDelegate:self];
-    }
-    else {
-        [A4GSettings setFacebookAuthorizing:YES];
-        [self.facebook authorize:nil];
-    }    
-}
-
-- (void)dialogDidComplete:(FBDialog *)dialog {
-    DLog(@"");
-    [self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil)];
-    [self.loadingView hideAfterDelay:2.0];
-}
-
-- (void)dialogCompleteWithUrl:(NSURL *)url {
-    DLog(@"URL:%@", url);
-}
-
-- (void)dialogDidNotCompleteWithUrl:(NSURL *)url {
-    DLog(@"URL:%@", url);
-}
-
-- (void)dialogDidNotComplete:(FBDialog *)dialog {
-    DLog(@"");
-}
-
-- (void)dialog:(FBDialog*)dialog didFailWithError:(NSError *)error {
-    DLog(@"Error: %@", [error description]);
-    [UIAlertView showWithTitle:NSLocalizedString(@"Facebook Error", nil) 
-                       message:[error localizedDescription] 
-                      delegate:self 
-                           tag:AlertViewError 
-             cancelButtonTitle:NSLocalizedString(@"OK", nil) 
-             otherButtonTitles:nil];
-}
-
-- (BOOL)dialog:(FBDialog*)dialog shouldOpenURLInExternalBrowser:(NSURL *)url {
-    return YES;
-}
-
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -558,6 +478,89 @@ typedef enum {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:alertView.message]];
         }
     }
+}
+
+#pragma mark - FBLoginViewDelegate
+
+- (void) shareFacebook:(NSString*)text url:(NSString*)url {
+    [self shareFacebook:text url:url image:nil];
+}
+
+- (void) shareFacebook:(NSString*)text url:(NSString*)url image:(UIImage *)image {
+    if (FBSession.activeSession.isOpen == NO) {
+        [FBSession openActiveSessionWithReadPermissions:nil
+                                           allowLoginUI:YES
+                                      completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+                                                 if (error) {
+                                                     [UIAlertView showWithTitle:NSLocalizedString(@"Facebook Error", nil)
+                                                                        message:error.localizedDescription
+                                                                       delegate:self
+                                                                            tag:AlertViewError
+                                                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                                              otherButtonTitles:nil];
+                                                 }
+                                                 else if (state == FBSessionStateOpen) {
+                                                     [self shareFacebook:text url:url image:image];
+                                                 }
+                                                 else if (state == FBSessionStateClosed) {
+                                                     [FBSession.activeSession closeAndClearTokenInformation];
+                                                 }
+                                                 else if (state == FBSessionStateClosedLoginFailed) {
+                                                     [FBSession.activeSession closeAndClearTokenInformation];
+                                                 }
+                                             }];
+    }
+    else if ([FBSession.activeSession.permissions indexOfObject:@"publish_actions"] == NSNotFound) {
+        [FBSession.activeSession reauthorizeWithPublishPermissions:[NSArray arrayWithObject:@"publish_actions"]
+                                                   defaultAudience:FBSessionDefaultAudienceFriends
+                                                 completionHandler:^(FBSession *session, NSError *error) {
+                                                     if (error) {
+                                                            [UIAlertView showWithTitle:NSLocalizedString(@"Facebook Error", nil)
+                                                                               message:error.localizedDescription
+                                                                              delegate:self
+                                                                                   tag:AlertViewError
+                                                                     cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                                                     otherButtonTitles:nil];
+                                                     }
+                                                     else {
+                                                         [self shareFacebook:text url:url image:image];
+                                                     }
+                                                 }];
+    }
+    else {
+        BOOL displayedNativeDialog = [FBNativeDialogs presentShareDialogModallyFrom:self.controller
+                                                                        initialText:text
+                                                                              image:image
+                                                                                url:url != nil ? [NSURL URLWithString:url] : nil
+                                                                            handler:nil];
+        if (!displayedNativeDialog) {
+            [self.loadingView showWithMessage:NSLocalizedString(@"Posting...", nil)];
+            [FBRequestConnection startForUploadPhoto:image
+                                   completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                                       if (error) {
+                                           [self.loadingView hide];
+                                           [UIAlertView showWithTitle:NSLocalizedString(@"Facebook Error", nil)
+                                                              message:error.localizedDescription
+                                                             delegate:self
+                                                                  tag:AlertViewError
+                                                    cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                                    otherButtonTitles:nil];
+                                       }
+                                       else {
+                                           [self.loadingView showWithMessage:NSLocalizedString(@"Posted", nil)];
+                                           [self.loadingView hideAfterDelay:2.0];
+                                       }
+                                       }];
+        }
+    }
+}
+
+- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
+    [self.loadingView showWithMessage:NSLocalizedString(@"Logged in", nil) hide:2.0];
+}
+
+- (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
+    [self.loadingView showWithMessage:NSLocalizedString(@"Logged out", nil) hide:2.0];
 }
 
 @end

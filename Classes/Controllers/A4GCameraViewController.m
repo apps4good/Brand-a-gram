@@ -642,10 +642,6 @@
     [self.captureSession stopRunning];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return interfaceOrientation == UIInterfaceOrientationPortrait;
-}
-
 #pragma mark - UISwipeGestureRecognizer
 
 - (void)swipeLeft:(UISwipeGestureRecognizer *)recognizer { 

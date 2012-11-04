@@ -95,10 +95,6 @@ typedef enum {
     self.shareController = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return interfaceOrientation == UIInterfaceOrientationPortrait;
-}
-
 #pragma mark - UITableViewController
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -221,10 +217,10 @@ typedef enum {
             [email appendString:@"<br/><br/>"];
             [email appendFormat:@"<a href='%@'>%@</a>", [A4GSettings appURL], [A4GSettings appURL]];
             [self.shareController sendEmail:email 
-                                withSubject:[A4GSettings appName] 
-                              addAttachment:nil 
-                                   fileName:nil 
-                                toRecipient:nil];
+                                    subject:[A4GSettings appName]
+                                 attachment:nil
+                                   fileName:nil
+                                  recipient:nil];
         }
         else if (indexPath.row == TableSectionAppRowUrl) {
             [self.shareController openURL:[A4GSettings appURL]];
@@ -236,10 +232,10 @@ typedef enum {
         }
         else if (indexPath.row == TableSectionAboutRowEmail) {
             [self.shareController sendEmail:[A4GSettings appVersion] 
-                                withSubject:[A4GSettings appName] 
-                              addAttachment:nil 
-                                   fileName:nil 
-                                toRecipient:[A4GSettings aboutEmail]];
+                                    subject:[A4GSettings appName]
+                                 attachment:nil
+                                   fileName:nil
+                                  recipient:[A4GSettings aboutEmail]];
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

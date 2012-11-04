@@ -133,14 +133,12 @@ typedef enum {
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-    } 
-    else {
-        return YES;
-    }
+    return interfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
+- (BOOL)shouldAutorotate {
+    return NO;
+}
 
 #pragma mark - UIAlertViewDelegate
 

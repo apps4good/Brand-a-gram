@@ -28,8 +28,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class A4GImageTableViewCell;
-
 @interface A4GTableViewCellFactory : NSObject
 
 + (UITableViewCell *) defaultTableViewCell:(UITableView*)tableView;
@@ -37,7 +35,5 @@
 + (UITableViewCell *) subtitleTableViewCell:(UITableView*)tableView;
 
 + (UITableViewCell *) valueTableViewCell:(UITableView*)tableView;
-
-+ (A4GImageTableViewCell*) imageTableViewCell:(UITableView*)tableView delegate:(id)delegate index:(NSIndexPath*)indexPath;
 
 @end

@@ -27,23 +27,12 @@
 // ##########################################################################################
 
 #import "A4GTableViewCellFactory.h"
-#import "A4GImageTableViewCell.h"
 
 @interface A4GTableViewCellFactory ()
 
 @end
 
 @implementation A4GTableViewCellFactory
-
-+ (A4GImageTableViewCell*) imageTableViewCell:(UITableView*)tableView delegate:(id)delegate index:(NSIndexPath*)indexPath  {
-    A4GImageTableViewCell *cell = (A4GImageTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"A4GImageTableViewCell"];
-    if (cell == nil) {
-        NSArray *objects = [[NSBundle mainBundle] loadNibNamed:@"A4GImageTableViewCell" owner:delegate options:nil];
-        cell = (A4GImageTableViewCell*)[objects lastObject];
-    }
-    cell.indexPath = indexPath;
-    return cell;
-}
 
 + (UITableViewCell *) defaultTableViewCell:(UITableView*)tableView {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCellStyleDefault"];

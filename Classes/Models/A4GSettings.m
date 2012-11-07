@@ -99,72 +99,16 @@
     return [A4GSettings colorFromBundleForKey:@"A4GButtonDoneColor"];
 }
 
-+ (UIColor *) tablePlainBackColor {
-    return [A4GSettings colorFromBundleForKey:@"A4GTablePlainBackColor"];
++ (UIColor *) tableBackColor {
+    return [A4GSettings colorFromBundleForKey:@"A4GTableBackColor"];
 }
 
-+ (UIColor *) tablePlainTextColor {
-    return [A4GSettings colorFromBundleForKey:@"A4GTablePlainTextColor"];
++ (UIColor *) tableRowTextColor {
+    return [A4GSettings colorFromBundleForKey:@"A4GTableRowTextColor"];
 }
 
-+ (UIColor *) tablePlainRowOddColor {
-    return [A4GSettings colorFromBundleForKey:@"A4GTablePlainRowOddColor"];
-}
-
-+ (UIColor *) tablePlainRowEvenColor {
-    return [A4GSettings colorFromBundleForKey:@"A4GTablePlainRowEvenColor"];
-}
-
-+ (UIColor *) tablePlainHeaderBackColor {
-    return [A4GSettings colorFromBundleForKey:@"A4GTablePlainHeaderBackColor"];
-}
-
-+ (UIColor *) tablePlainHeaderTextColor {
-    return [A4GSettings colorFromBundleForKey:@"A4GTablePlainHeaderTextColor"];
-}
-
-+ (UIColor *) tableGroupedBackColor {
-    return [A4GSettings colorFromBundleForKey:@"A4GTableGroupedBackColor"];
-}
-
-+ (UIColor *) tableGroupedTextColor {
-    return [A4GSettings colorFromBundleForKey:@"A4GTableGroupedTextColor"];
-}
-
-+ (UIColor *) tableGroupedHeaderTextColor {
-    return [A4GSettings colorFromBundleForKey:@"A4GTableGroupedHeaderTextColor"];
-}
-
-+(NSString*)facebookAppID {
-    return [A4GSettings stringFromBundleForKey:@"UNFacebookAppID"];
-}
-
-+(NSString*)facebookAppSecret {
-    return [A4GSettings stringFromBundleForKey:@"UNFacebookAppSecret"];
-}
-
-+(NSString*)facebookTokenKey {
-    return [A4GSettings stringFromDefaultsForKey:@"facebookTokenKey" defaultValue:nil]; 
-}
-
-+(void)setFacebookTokenKey:(NSString*)tokenKey {
-    [A4GSettings setString:tokenKey forKey:@"facebookTokenKey"];
-}
-
-+(NSDate*)facebookDateKey {
-    return [A4GSettings dateFromDefaultsForKey:@"facebookDateKey" defaultValue:nil]; 
-}
-
-+(void)setFacebookDateKey:(NSDate*)dateKey {
-    [A4GSettings setDate:dateKey forKey:@"facebookDateKey"];
-}
-
-+(BOOL)facebookAuthorizing {
-    return [A4GSettings boolFromDefaultsForKey:@"facebookAuthorizing" defaultValue:NO];
-}
-
-+(void)setFacebookAuthorizing:(BOOL)facebookAuthorizing {
-    [A4GSettings setBool:facebookAuthorizing forKey:@"facebookAuthorizing"];
++ (UIColor *) tableHeaderTextColor {
+    return [A4GSettings colorFromBundleForKey:@"A4GTableHeaderTextColor"];
 }
 
 #pragma mark - Helpers

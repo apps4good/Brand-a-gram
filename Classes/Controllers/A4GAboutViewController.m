@@ -29,7 +29,6 @@
 #import "A4GAboutViewController.h"
 #import "A4GTableViewCellFactory.h"
 #import "UIViewController+A4G.h"
-#import "A4GImageTableViewCell.h"
 #import "A4GSettings.h"
 #import "A4GDevice.h"
 
@@ -61,7 +60,6 @@ typedef enum {
     TableSectionAboutRowText,
     TableSectionAboutRowEmail,
     TableSectionAboutRowUrl,
-    TableSectionAboutRowLogo,
     TableSectionAboutRows
 } TableSectionAboutRow;
 
@@ -115,7 +113,7 @@ typedef enum {
     if (indexPath.section == TableSectionApp) {
         UITableViewCell *cell = [A4GTableViewCellFactory defaultTableViewCell:tableView];
         cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
-        cell.textLabel.textColor = [A4GSettings tableGroupedTextColor];
+        cell.textLabel.textColor = [A4GSettings tableRowTextColor];
         cell.textLabel.numberOfLines = 0;
         if (indexPath.row == TableSectionAppRowText) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -130,24 +128,29 @@ typedef enum {
         else if (indexPath.row == TableSectionAppRowEmail) {
             cell.selectionStyle = UITableViewCellSelectionStyleGray;
             cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"email.png"]];
-            cell.textLabel.text = NSLocalizedString(@"Share Application", nil);
+            if ([[A4GSettings appURL] hasPrefix:@"https://itunes.apple.com"]) {
+                cell.textLabel.text = NSLocalizedString(@"Share Application", nil);
+            }
+            else {
+                cell.textLabel.text = NSLocalizedString(@"Share Information", nil);
+            }
         }
         else if (indexPath.row == TableSectionAppRowUrl) {
             cell.selectionStyle = UITableViewCellSelectionStyleGray;
             cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"web.png"]];
-            cell.textLabel.text = NSLocalizedString(@"Visit App Store", nil);
+            if ([[A4GSettings appURL] hasPrefix:@"https://itunes.apple.com"]) {
+                cell.textLabel.text = NSLocalizedString(@"Visit App Store", nil);
+            }
+            else {
+                cell.textLabel.text = NSLocalizedString(@"Visit Web Site", nil);
+            }
         }
         return cell;
     }
     else if (indexPath.section == TableSectionAbout) {
-        if (indexPath.row == TableSectionAboutRowLogo) {
-            A4GImageTableViewCell *cell = [A4GTableViewCellFactory imageTableViewCell:tableView delegate:self index:indexPath];
-            cell.image = [UIImage imageNamed:@"logo.png"];
-            return cell;
-        }
         UITableViewCell *cell = [A4GTableViewCellFactory defaultTableViewCell:tableView];
         cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
-        cell.textLabel.textColor = [A4GSettings tableGroupedTextColor];
+        cell.textLabel.textColor = [A4GSettings tableRowTextColor];
         cell.textLabel.numberOfLines = 0;
         if (indexPath.row == TableSectionAboutRowText) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -176,10 +179,20 @@ typedef enum {
             text = [A4GSettings appText];
         }
         else if (indexPath.row == TableSectionAppRowEmail) {
-            text = NSLocalizedString(@"Share Application", nil);
+            if ([[A4GSettings appURL] hasPrefix:@"https://itunes.apple.com"]) {
+                text = NSLocalizedString(@"Share Application", nil);
+            }
+            else {
+                text = NSLocalizedString(@"Share Information", nil);
+            }
         }
         else if (indexPath.row == TableSectionAppRowUrl) {
-            text = NSLocalizedString(@"Visit App Store", nil);
+            if ([[A4GSettings appURL] hasPrefix:@"https://itunes.apple.com"]) {
+                text = NSLocalizedString(@"Visit App Store", nil);
+            }
+            else {
+                text = NSLocalizedString(@"Visit Web Site", nil);;
+            }
         }
     }
     else if (indexPath.section == TableSectionAbout) {
@@ -191,9 +204,6 @@ typedef enum {
         }
         else if (indexPath.row == TableSectionAboutRowUrl) {
             text = [A4GSettings aboutURL];
-        }
-        else if (indexPath.row == TableSectionAboutRowLogo) {
-            return 200;
         }
     }
     return [self tableView:tableView heightForText:text withFont:[UIFont boldSystemFontOfSize:17]];
@@ -231,8 +241,8 @@ typedef enum {
             [self.shareController openURL:[A4GSettings aboutURL]];
         }
         else if (indexPath.row == TableSectionAboutRowEmail) {
-            [self.shareController sendEmail:[A4GSettings appVersion] 
-                                    subject:[A4GSettings appName]
+            [self.shareController sendEmail:nil
+                                    subject:[NSString stringWithFormat:@"%@ %@", [A4GSettings appName], [A4GSettings appVersion]]
                                  attachment:nil
                                    fileName:nil
                                   recipient:[A4GSettings aboutEmail]];

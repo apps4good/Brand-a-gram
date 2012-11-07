@@ -27,23 +27,11 @@
 		<string>overlay-7.png</string>
 		<string>overlay-8.png</string>
 	</array>
-	<key>A4GTableGroupedBackColor</key>
+	<key>A4GTableBackColor</key>
 	<string>#F2F2F2</string>
-	<key>A4GTableGroupedHeaderTextColor</key>
+	<key>A4GTableHeaderTextColor</key>
 	<string>#6E6E6E</string>
-	<key>A4GTableGroupedTextColor</key>
-	<string>#848484</string>
-	<key>A4GTablePlainBackColor</key>
-	<string>#FAFAFA</string>
-	<key>A4GTablePlainHeaderBackColor</key>
-	<string>#6E6E6E</string>
-	<key>A4GTablePlainHeaderTextColor</key>
-	<string>#424242</string>
-	<key>A4GTablePlainRowEvenColor</key>
-	<string>#F3F3F3</string>
-	<key>A4GTablePlainRowOddColor</key>
-	<string>#F1F1F1</string>
-	<key>A4GTablePlainTextColor</key>
+	<key>A4GTableRowTextColor</key>
 	<string>#848484</string>
 	<key>A4GToolBarColor</key>
 	<string>#848484</string>
@@ -110,7 +98,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>UNFacebookAppSecret</key>
-	<string>91114ba6da2dcdb3e71c35b9b0258d73</string>
 </dict>
 </plist>

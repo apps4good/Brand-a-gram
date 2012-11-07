@@ -79,7 +79,7 @@ typedef enum {
         self.textShareSMS = NSLocalizedString(@"Share via SMS", nil);
         self.textShareTwitter = NSLocalizedString(@"Share via Twitter", nil);
         self.textShareFacebook = NSLocalizedString(@"Share via Facebook", nil);
-        self.textPrintDetails = NSLocalizedString(@"Print Information", nil);
+        self.textPrintDetails = NSLocalizedString(@"Send to Printer", nil);
         self.textCopyClipboard = NSLocalizedString(@"Copy to Clipboard", nil);
         self.textOpenIn = NSLocalizedString(@"Open In...", nil);
         self.textCancelAction = NSLocalizedString(@"Cancel", nil);
@@ -220,8 +220,7 @@ typedef enum {
         UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
         pasteBoard.persistent = YES;
         pasteBoard.string = string;
-        [self.loadingView showWithMessage:NSLocalizedString(@"Copied", nil)];
-        [self.loadingView hideAfterDelay:2.0];
+        [self.loadingView showWithMessage:NSLocalizedString(@"Copied", nil) hide:2.0];
     }
 }
 
@@ -302,8 +301,7 @@ typedef enum {
     if (result == MFMailComposeResultSent) {
         DLog(@"MFMailComposeResultSent");
         [self.controller dismissModalViewControllerAnimated:YES];
-        [self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil)];
-        [self.loadingView hideAfterDelay:2.0];
+        [self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil) hide:2.0];
     }
     else if (result == MFMailComposeResultFailed) {
         DLog(@"MFMailComposeResultFailed");
@@ -448,8 +446,7 @@ typedef enum {
     if (result == MessageComposeResultSent) {
         DLog(@"MessageComposeResultSent");
         [self.controller dismissModalViewControllerAnimated:YES];
-        [self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil)];
-        [self.loadingView hideAfterDelay:2.0];
+        [self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil) hide:2.0];
     }
     else if (result == MessageComposeResultFailed) {
         DLog(@"MessageComposeResultFailed");
@@ -482,11 +479,11 @@ typedef enum {
 
 #pragma mark - FBLoginViewDelegate
 
-- (void) shareFacebook:(NSString*)text url:(NSString*)url {
-    [self shareFacebook:text url:url image:nil];
+- (void) postFacebook:(NSString*)text url:(NSString*)url {
+    [self postFacebook:text url:url image:nil];
 }
 
-- (void) shareFacebook:(NSString*)text url:(NSString*)url image:(UIImage *)image {
+- (void) postFacebook:(NSString*)text url:(NSString*)url image:(UIImage *)image {
     if (FBSession.activeSession.isOpen == NO) {
         [FBSession openActiveSessionWithReadPermissions:nil
                                            allowLoginUI:YES
@@ -500,7 +497,7 @@ typedef enum {
                                                               otherButtonTitles:nil];
                                                  }
                                                  else if (state == FBSessionStateOpen) {
-                                                     [self shareFacebook:text url:url image:image];
+                                                     [self postFacebook:text url:url image:image];
                                                  }
                                                  else if (state == FBSessionStateClosed) {
                                                      [FBSession.activeSession closeAndClearTokenInformation];
@@ -523,7 +520,7 @@ typedef enum {
                                                                      otherButtonTitles:nil];
                                                      }
                                                      else {
-                                                         [self shareFacebook:text url:url image:image];
+                                                         [self postFacebook:text url:url image:image];
                                                      }
                                                  }];
     }
@@ -532,7 +529,27 @@ typedef enum {
                                                                         initialText:text
                                                                               image:image
                                                                                 url:url != nil ? [NSURL URLWithString:url] : nil
-                                                                            handler:nil];
+                                                                            handler:^(FBNativeDialogResult result, NSError *error) {
+                                                                                if (error) {
+                                                                                    [UIAlertView showWithTitle:NSLocalizedString(@"Facebook Error", nil)
+                                                                                                       message:error.localizedDescription
+                                                                                                      delegate:self
+                                                                                                           tag:AlertViewError
+                                                                                             cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                                                                             otherButtonTitles:nil];
+                                                                                }
+                                                                                else if (result == FBNativeDialogResultError){
+                                                                                    [UIAlertView showWithTitle:NSLocalizedString(@"Facebook Error", nil)
+                                                                                                       message:NSLocalizedString(@"Unable to post to Facebook", nil)
+                                                                                                      delegate:self
+                                                                                                           tag:AlertViewError
+                                                                                             cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                                                                             otherButtonTitles:nil];
+                                                                                }
+                                                                                else if (result == FBNativeDialogResultSucceeded){
+                                                                                    [self.loadingView showWithMessage:NSLocalizedString(@"Posted", nil) hide:2.0];
+                                                                                }
+                                                                            }];
         if (!displayedNativeDialog) {
             [self.loadingView showWithMessage:NSLocalizedString(@"Posting...", nil)];
             [FBRequestConnection startForUploadPhoto:image
@@ -547,8 +564,9 @@ typedef enum {
                                                     otherButtonTitles:nil];
                                        }
                                        else {
-                                           [self.loadingView showWithMessage:NSLocalizedString(@"Posted", nil)];
-                                           [self.loadingView hideAfterDelay:2.0];
+                                           NSDictionary *dictionary = (NSDictionary *)result;
+                                           DLog(@"Result:%@", dictionary);
+                                           [self.loadingView showWithMessage:NSLocalizedString(@"Posted", nil) hide:2.0];
                                        }
                                        }];
         }

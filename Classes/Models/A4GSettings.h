@@ -45,30 +45,8 @@
 + (UIColor *) toolBarColor;
 + (UIColor *) buttonDoneColor;
 
-+ (UIColor *) tablePlainBackColor;
-+ (UIColor *) tablePlainTextColor;
-
-+ (UIColor *) tablePlainRowOddColor;
-+ (UIColor *) tablePlainRowEvenColor;
-
-+ (UIColor *) tablePlainHeaderBackColor;
-+ (UIColor *) tablePlainHeaderTextColor;
-
-+ (UIColor *) tableGroupedBackColor;
-+ (UIColor *) tableGroupedTextColor;
-
-+ (UIColor *) tableGroupedHeaderTextColor;
-
-+(NSString*)facebookAppID;
-+(NSString*)facebookAppSecret;
-
-+(NSString*)facebookTokenKey;
-+(void)setFacebookTokenKey:(NSString*)tokenKey;
-
-+(NSDate*)facebookDateKey;
-+(void)setFacebookDateKey:(NSDate*)dateKey;
-
-+(BOOL)facebookAuthorizing;
-+(void)setFacebookAuthorizing:(BOOL)facebookAuthorizing;
++ (UIColor *) tableBackColor;
++ (UIColor *) tableRowTextColor;
++ (UIColor *) tableHeaderTextColor;
 
 @end

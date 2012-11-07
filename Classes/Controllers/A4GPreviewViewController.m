@@ -51,7 +51,7 @@
 
 - (IBAction)facebook:(id)sender event:(UIEvent*)event {
     DLog(@"");
-    [self.shareController shareFacebook:[A4GSettings appName] url:nil image:self.image];
+    [self.shareController postFacebook:[A4GSettings appName] url:nil image:self.image];
 }
 
 - (IBAction)email:(id)sender event:(UIEvent*)event {

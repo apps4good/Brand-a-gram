@@ -82,8 +82,8 @@
 - (BOOL) canOpenInWithUrl:(NSURL *)url;
 - (void) showOpenInWithUrl:(NSString*)url;
 
-- (void) shareFacebook:(NSString*)text url:(NSString*)url;
-- (void) shareFacebook:(NSString*)text url:(NSString*)url image:(UIImage*)image;
+- (void) postFacebook:(NSString*)text url:(NSString*)url;
+- (void) postFacebook:(NSString*)text url:(NSString*)url image:(UIImage*)image;
 
 @end
 

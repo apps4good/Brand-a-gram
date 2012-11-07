@@ -53,16 +53,9 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if ([A4GDevice isIPad]) {
-        [self.tableView setBackgroundView:nil];
-        [self.tableView setBackgroundView:[[[UIView alloc] init] autorelease]];
-    }
-    if (self.tableView.style == UITableViewStylePlain) {
-        self.tableView.backgroundColor = [A4GSettings tablePlainBackColor];
-    }
-    else {
-        self.tableView.backgroundColor = [A4GSettings tableGroupedBackColor];
-    }
+    self.tableView.backgroundView = nil;
+    self.tableView.backgroundView = [[[UIView alloc] init] autorelease];
+    self.tableView.backgroundColor = [A4GSettings tableBackColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -94,17 +87,7 @@ typedef enum {
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (tableView.style == UITableViewStylePlain) {
-     	if (indexPath.row % 2) {
-            cell.backgroundColor = [A4GSettings tablePlainRowEvenColor];
-        }
-        else {
-            cell.backgroundColor = [A4GSettings tablePlainRowOddColor];
-        }   
-    }
-    else {
-        cell.backgroundColor = [UIColor whiteColor];
-    }
+    cell.backgroundColor = [UIColor whiteColor];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -136,19 +119,11 @@ typedef enum {
     return MAX(size.height + 25, 44.0f);
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (tableView.style == UITableViewStylePlain) {
-        return [A4GHeaderView headerForTable:tableView 
-                                        text:[self tableView:tableView titleForHeaderInSection:section]
-                                   textColor:[A4GSettings tablePlainHeaderTextColor] 
-                             backgroundColor:[A4GSettings tablePlainHeaderBackColor]];   
-    }
-    else {
-        return [A4GHeaderView headerForTable:tableView 
-                                        text:[self tableView:tableView titleForHeaderInSection:section]
-                                   textColor:[A4GSettings tableGroupedHeaderTextColor] 
-                             backgroundColor:[UIColor clearColor]];
-    }   
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {    
+    return [A4GHeaderView headerForTable:tableView
+                                    text:[self tableView:tableView titleForHeaderInSection:section]
+                               textColor:[A4GSettings tableHeaderTextColor] 
+                         backgroundColor:[UIColor clearColor]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForText:(NSString*)text withFont:(UIFont*)font {
